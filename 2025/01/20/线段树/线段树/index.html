@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/profile.png">
-  <link rel="icon" href="/img/profile.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/project/img/profile.jpg">
+  <link rel="icon" href="/project/img/profile.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,12 +19,12 @@
   <meta name="author" content="linyisu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="线段树支持区间加法 （维护区间和） 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959">
+    <meta name="description" content="线段树支持区间加法 （维护区间和） struct SegTree &#123;     int n;     vector&lt;int&gt; laz, arr, sum;      SegTree() &#123;&#125;;     SegTree(int n_)      &#123;         n &#x3D; n_;         init();     &#125;      void i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线段树自编模板">
-<meta property="og:url" content="http://example.com/2025/01/20/%E7%BA%BF%E6%AE%B5%E6%A0%91/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
+<meta property="og:url" content="http://linyisu.github.io/project/2025/01/20/%E7%BA%BF%E6%AE%B5%E6%A0%91/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="线段树支持区间加法 （维护区间和） 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959">
+<meta property="og:description" content="线段树支持区间加法 （维护区间和） struct SegTree &#123;     int n;     vector&lt;int&gt; laz, arr, sum;      SegTree() &#123;&#125;;     SegTree(int n_)      &#123;         n &#x3D; n_;         init();     &#125;      void i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-20T13:11:30.000Z">
 <meta property="article:modified_time" content="2025-01-20T14:19:17.628Z">
@@ -44,6 +44,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
@@ -58,12 +60,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/project/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/project/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/project/css/highlight-dark.css" />
   
 
 
@@ -72,15 +74,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"linyisu.github.io","root":"/project/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/project/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/project/js/utils.js" ></script>
+  <script  src="/project/js/color-schema.js" ></script>
   
 
 
@@ -101,7 +103,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/project/">
       <strong>Fluid</strong>
     </a>
 
@@ -120,7 +122,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/project/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -132,7 +134,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
+              <a class="nav-link" href="/project/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -144,7 +146,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/project/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -156,7 +158,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/project/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -168,7 +170,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/project/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -198,7 +200,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/project/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -227,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          322 字
+          311 字
         
       </span>
     
@@ -281,7 +283,108 @@
               <div class="markdown-body">
                 
                 <p>线段树支持区间加法 （维护区间和）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">SegTree</span><br>&#123;<br>    <span class="hljs-type">int</span> n;<br>    vector&lt;<span class="hljs-type">int</span>&gt; laz, arr, sum;<br><br>    <span class="hljs-built_in">SegTree</span>() &#123;&#125;;<br>    <span class="hljs-built_in">SegTree</span>(<span class="hljs-type">int</span> n_) <br>    &#123;<br>        n = n_;<br>        <span class="hljs-built_in">init</span>();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        laz.<span class="hljs-built_in">resize</span>(<span class="hljs-number">4</span> * n, <span class="hljs-number">0</span>);<br>        arr.<span class="hljs-built_in">resize</span>(<span class="hljs-number">4</span> * n, <span class="hljs-number">0</span>);<br>        sum.<span class="hljs-built_in">resize</span>(<span class="hljs-number">4</span> * n, <span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, n, <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> u)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (l == r)<br>        &#123;<br>            sum[u] = arr[l];<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">build</span>(l, mid, u &lt;&lt; <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">build</span>(mid + <span class="hljs-number">1</span>, r, u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">push_up</span>(u);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push_up</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span></span><br><span class="hljs-function">    </span>&#123;<br>        sum[u] = sum[u &lt;&lt; <span class="hljs-number">1</span>] + sum[u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push_down</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> llen, <span class="hljs-type">int</span> rlen)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (laz[u])<br>        &#123;<br>            <span class="hljs-built_in">lazy</span>(u &lt;&lt; <span class="hljs-number">1</span>, laz[u], llen);<br>            <span class="hljs-built_in">lazy</span>(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, laz[u], rlen);<br>            laz[u] = <span class="hljs-number">0</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">lazy</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> tag, <span class="hljs-type">int</span> len)</span></span><br><span class="hljs-function">    </span>&#123;<br>        sum[u] += tag * len;<br>        laz[u] += tag;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-built_in">modify</span>(l, r, x, <span class="hljs-number">1</span>, n, <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> jobl, <span class="hljs-type">int</span> jobr, <span class="hljs-type">int</span> jobv, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> u)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (jobl &lt;= l &amp;&amp; jobr &gt;= r)<br>        &#123;<br>            <span class="hljs-built_in">lazy</span>(u, jobv, r - l + <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">push_down</span>(u, mid - l + <span class="hljs-number">1</span>, r - mid);<br>        <span class="hljs-keyword">if</span> (jobl &lt;= mid)<br>            <span class="hljs-built_in">modify</span>(jobl, jobr, jobv, l, mid, u &lt;&lt; <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">if</span> (jobr &gt; mid)<br>            <span class="hljs-built_in">modify</span>(jobl, jobr, jobv, mid + <span class="hljs-number">1</span>, r, u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">push_up</span>(u);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(l, r, <span class="hljs-number">1</span>, n, <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> jobl, <span class="hljs-type">int</span> jobr, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> u)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (jobl &lt;= l &amp;&amp; jobr &gt;= r)<br>            <span class="hljs-keyword">return</span> sum[u];<br><br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0ll</span>;<br>        <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">push_down</span>(u, mid - l + <span class="hljs-number">1</span>, r - mid);<br>        <span class="hljs-keyword">if</span> (jobl &lt;= mid)<br>            ans += <span class="hljs-built_in">query</span>(jobl, jobr, l, mid, u &lt;&lt; <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">if</span> (jobr &gt; mid)<br>            ans += <span class="hljs-built_in">query</span>(jobl, jobr, mid + <span class="hljs-number">1</span>, r, u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">SegTree</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> laz<span class="token punctuation">,</span> arr<span class="token punctuation">,</span> sum<span class="token punctuation">;</span>
+
+    <span class="token function">SegTree</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">SegTree</span><span class="token punctuation">(</span><span class="token keyword">int</span> n_<span class="token punctuation">)</span> 
+    <span class="token punctuation">&#123;</span>
+        n <span class="token operator">=</span> n_<span class="token punctuation">;</span>
+        <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        laz<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">4</span> <span class="token operator">*</span> n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">4</span> <span class="token operator">*</span> n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sum<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">4</span> <span class="token operator">*</span> n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">build</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">,</span> <span class="token keyword">int</span> u<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">==</span> r<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            sum<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">build</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">build</span><span class="token punctuation">(</span>mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">push_up</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">push_up</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        sum<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> sum<span class="token punctuation">[</span>u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> sum<span class="token punctuation">[</span>u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">push_down</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> llen<span class="token punctuation">,</span> <span class="token keyword">int</span> rlen<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>laz<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">lazy</span><span class="token punctuation">(</span>u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span> laz<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> llen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">lazy</span><span class="token punctuation">(</span>u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">,</span> laz<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> rlen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            laz<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">lazy</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> tag<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        sum<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">+=</span> tag <span class="token operator">*</span> len<span class="token punctuation">;</span>
+        laz<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">+=</span> tag<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">modify</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> r<span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span><span class="token keyword">int</span> jobl<span class="token punctuation">,</span> <span class="token keyword">int</span> jobr<span class="token punctuation">,</span> <span class="token keyword">int</span> jobv<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">,</span> <span class="token keyword">int</span> u<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobl <span class="token operator">&lt;=</span> l <span class="token operator">&amp;&amp;</span> jobr <span class="token operator">>=</span> r<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">lazy</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> jobv<span class="token punctuation">,</span> r <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">push_down</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> mid <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">-</span> mid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobl <span class="token operator">&lt;=</span> mid<span class="token punctuation">)</span>
+            <span class="token function">modify</span><span class="token punctuation">(</span>jobl<span class="token punctuation">,</span> jobr<span class="token punctuation">,</span> jobv<span class="token punctuation">,</span> l<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobr <span class="token operator">></span> mid<span class="token punctuation">)</span>
+            <span class="token function">modify</span><span class="token punctuation">(</span>jobl<span class="token punctuation">,</span> jobr<span class="token punctuation">,</span> jobv<span class="token punctuation">,</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">push_up</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">query</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> r<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">int</span> jobl<span class="token punctuation">,</span> <span class="token keyword">int</span> jobr<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">,</span> <span class="token keyword">int</span> u<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobl <span class="token operator">&lt;=</span> l <span class="token operator">&amp;&amp;</span> jobr <span class="token operator">>=</span> r<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> sum<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0ll</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">push_down</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> mid <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">-</span> mid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobl <span class="token operator">&lt;=</span> mid<span class="token punctuation">)</span>
+            ans <span class="token operator">+=</span> <span class="token function">query</span><span class="token punctuation">(</span>jobl<span class="token punctuation">,</span> jobr<span class="token punctuation">,</span> l<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jobr <span class="token operator">></span> mid<span class="token punctuation">)</span>
+            ans <span class="token operator">+=</span> <span class="token function">query</span><span class="token punctuation">(</span>jobl<span class="token punctuation">,</span> jobr<span class="token punctuation">,</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">,</span> u <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 
                 
               </div>
@@ -300,7 +403,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%A8%A1%E6%9D%BF/" class="category-chain-item">模板</a>
+  <a href="/project/categories/%E6%A8%A1%E6%9D%BF/" class="category-chain-item">模板</a>
   
   
 
@@ -315,7 +418,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+        <a href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
       
     </div>
   
@@ -328,7 +431,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>线段树自编模板</div>
-      <div>http://example.com/2025/01/20/线段树/线段树/</div>
+      <div>http://linyisu.github.io/project/2025/01/20/线段树/线段树/</div>
     </div>
     <div class="license-meta">
       
@@ -376,7 +479,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/01/20/%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0/%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0/" title="解题笔记">
+                      <a href="/project/2025/01/20/%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0/%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0/" title="解题笔记">
                         <span class="hidden-mobile">解题笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -514,8 +617,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/project/js/events.js" ></script>
+<script  src="/project/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -537,7 +640,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/project/js/img-lazyload.js" ></script>
   
 
 
@@ -582,6 +685,8 @@
   });
 </script>
 
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
@@ -636,7 +741,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/project/js/local-search.js" ></script>
 
 
 
@@ -644,7 +749,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/project/js/boot.js" ></script>
 
 
   
