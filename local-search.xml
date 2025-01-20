@@ -45,9 +45,9 @@
     
     <tags>
       
-      <tag>算法</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>算法</tag>
       
     </tags>
     
@@ -66,6 +66,19 @@
     
   </entry>
   
+  
+  
+  
+  
+  
+  <entry>
+    <title>about</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
   
   
   
