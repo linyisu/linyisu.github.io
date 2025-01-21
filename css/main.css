@@ -1250,6 +1250,26 @@ i.iconfont {
 .index-btm a {
   color: var(--sec-text-color);
 }
+.banner-slogan {
+  text-align: center; /* 标语居中 */
+  margin: 0 auto;
+  padding-top: 2rem; /* 距顶部的间距 */
+}
+.slogan {
+  margin: 0; /* 去掉外边距 */
+  line-height: 1.8; /* 设置行高 */
+}
+.slogan-cn {
+  font-size: 2rem; /* 中文标语字体大小 */
+  font-weight: bold; /* 加粗 */
+  color: var(--text-color); /* 使用主题主文本颜色 */
+}
+.slogan-en {
+  font-size: 1.2rem; /* 英文标语字体大小 */
+  margin-top: 0.5rem; /* 与中文标语的间距 */
+  color: var(--sec-text-color); /* 使用次级文本颜色 */
+  font-style: italic; /* 设置斜体，增强层次感 */
+}
 .index-excerpt {
   color: var(--sec-text-color);
   margin: 0.5rem 0;
