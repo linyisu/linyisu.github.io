@@ -27,7 +27,7 @@
 <meta property="og:description" content="基本上算是最终版本的模板了吧  带懒标Laz 维护多种区间信息Info template&lt;class Info, class Laz&gt; struct SegTree &#123;     int n;     vector&lt;int&gt; arr;     vector&lt;Laz&gt; laz;     vector&lt;Info&gt; info;      SegTree() : n(0)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-22T10:09:11.000Z">
-<meta property="article:modified_time" content="2025-01-22T10:09:15.029Z">
+<meta property="article:modified_time" content="2025-01-22T10:16:33.530Z">
 <meta property="article:author" content="linyisu">
 <meta property="article:tag" content="算法与数据结构">
 <meta property="article:tag" content="线段树">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.2k 字
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          26 分钟
+          27 分钟
         
       </span>
     
@@ -387,6 +387,34 @@
 
 <span class="token keyword">struct</span> <span class="token class-name">Laz</span>
 <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> 
+    <span class="token function">Laz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span>  <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token function">Laz</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token operator">:</span>  <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">void</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">const</span> Laz <span class="token operator">&amp;</span>tag<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Info</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> 
+    <span class="token function">Info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token function">Info</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">void</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">const</span> Laz <span class="token operator">&amp;</span>tag<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span>
+
+    Info <span class="token keyword">operator</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Info <span class="token operator">&amp;</span>a<span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>// 只需修改Laz 和 Info 结构体的逻辑， 即可实现多种修改懒标，以及维护多种区间信息。</p>
+<p>如下，为<strong>支持区间修改，区间加减， 维护最大值的一颗线段树</strong>。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Laz</span>
+<span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> add <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> change <span class="token operator">=</span> inf<span class="token punctuation">;</span>
     <span class="token function">Laz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">change</span><span class="token punctuation">(</span>inf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
     <span class="token function">Laz</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">change</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
@@ -419,7 +447,7 @@
     <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token function">max</span><span class="token punctuation">(</span>mx<span class="token punctuation">,</span> a<span class="token punctuation">.</span>mx<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h3 id="支持区间加减-维护区间和"><a class="markdownIt-Anchor" href="#支持区间加减-维护区间和"></a> 支持区间加减 （维护区间和）</h3>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">SegTree</span>
 <span class="token punctuation">&#123;</span>
