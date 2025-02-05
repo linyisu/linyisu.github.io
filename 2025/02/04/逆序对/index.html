@@ -27,7 +27,7 @@
 <meta property="og:description" content="逆序对  题目描述 猫猫 TOM 和小老鼠 JERRY 最近又较量上了，但是毕竟都是成年人，他们已经不喜欢再玩那种你追我赶的游戏，现在他们喜欢玩统计。 最近，TOM 老猫查阅到一个人类称之为“逆序对”的东西，这东西是这样定义的：对于给定的一段正整数序列，逆序对就是序列中 ai&gt;aja_i&gt;a_jai​&gt;aj​ 且 i&lt;ji&lt;ji&lt;j 的有序对。知道这概念后，他">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-04T13:26:26.000Z">
-<meta property="article:modified_time" content="2025-02-04T13:52:08.018Z">
+<meta property="article:modified_time" content="2025-02-04T13:55:23.289Z">
 <meta property="article:author" content="linyisu">
 <meta property="article:tag" content="线段树">
 <meta property="article:tag" content="逆序对">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          839 字
+          838 字
         
       </span>
     
@@ -295,10 +295,10 @@
 <p>第二行 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 个数，表示给定的序列。序列中每个数字不超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span>。</p>
 <h4 id="输出格式"><a class="markdownIt-Anchor" href="#输出格式"></a> 输出格式</h4>
 <p>输出序列中逆序对的数目。</p>
-<h4 id="样例输入-1"><a class="markdownIt-Anchor" href="#样例输入-1"></a> 样例输入 #1</h4>
+<h4 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h4>
 <figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">6
 5 4 2 6 3 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
-<h4 id="样例输出-1"><a class="markdownIt-Anchor" href="#样例输出-1"></a> 样例输出 #1</h4>
+<h4 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h4>
 <figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">11<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
 <h4 id="提示"><a class="markdownIt-Anchor" href="#提示"></a> 提示</h4>
 <p>对于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>25</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">25\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">%</span></span></span></span> 的数据，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≤</mo><mn>2500</mn></mrow><annotation encoding="application/x-tex">n \leq 2500</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">0</span><span class="mord">0</span></span></span></span>。</p>
@@ -520,12 +520,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2025/02/05/gcd/" title="gcd &amp;&amp; ecgcd">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">gcd &amp;&amp; ecgcd</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/03/%E6%A0%A1%E9%97%A8%E5%A4%96%E7%9A%84%E6%A0%91%EF%BC%88%E5%A2%9E%E5%BC%BA%E7%89%88%EF%BC%89/" title="校门外的树（增强版）">
-                        <span class="hidden-mobile">校门外的树（增强版）</span>
+                      <a href="/2025/02/04/%E5%A5%B6%E9%85%AA/" title="奶酪">
+                        <span class="hidden-mobile">奶酪</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
