@@ -23,31 +23,6 @@
   
   
   <entry>
-    <title>md 文件快捷上传指令</title>
-    <link href="/2025/03/11/md%E6%96%87%E4%BB%B6%E5%BF%AB%E6%8D%B7%E4%B8%8A%E4%BC%A0/"/>
-    <url>/2025/03/11/md%E6%96%87%E4%BB%B6%E5%BF%AB%E6%8D%B7%E4%B8%8A%E4%BC%A0/</url>
-    
-    <content type="html"><![CDATA[<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">call @echo off%1 mshta vbscript:CreateObject<span class="token punctuation">(</span><span class="token string">"Shell.Application"</span><span class="token punctuation">)</span>.ShellExecute<span class="token punctuation">(</span><span class="token string">"cmd.exe"</span>,<span class="token string">"/c %~s0 ::"</span>,<span class="token string">""</span>,<span class="token string">"runas"</span>,1<span class="token punctuation">)</span><span class="token punctuation">(</span>window.close<span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token builtin class-name">exit</span>call <span class="token builtin class-name">cd</span> /d <span class="token string">"%~dp0"</span>call <span class="token builtin class-name">cd</span> /d <span class="token string">"你的本地文件路径"</span>call <span class="token builtin class-name">echo</span> 正在清理旧文件<span class="token punctuation">..</span>.call hexo cleancall <span class="token builtin class-name">echo</span> 正在生成静态文件<span class="token punctuation">..</span>.call hexo gcall <span class="token builtin class-name">echo</span> 正在部署到服务器<span class="token punctuation">..</span>.call hexo dcall <span class="token builtin class-name">echo</span> 所有操作已完成！call @cmd.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure><p>可将上面的代码复制到记事本，并更改后缀名为<code>.bat</code>, 即可快捷上传。</p><p><strong>记得将第 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn></mrow><annotation encoding="application/x-tex">7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span></span></span></span> 行行代码更改为本地文件的路径！</strong></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>网站</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>HEXO</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Hello World</title>
     <link href="/2025/03/11/hello-world/"/>
     <url>/2025/03/11/hello-world/</url>
