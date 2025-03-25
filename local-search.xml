@@ -397,6 +397,31 @@
   
   
   <entry>
+    <title>遍历二叉树</title>
+    <link href="/2025/02/05/%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <url>/2025/02/05/%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="遍历二叉树"><a class="markdownIt-Anchor" href="#遍历二叉树"></a> 遍历二叉树</h1><h3 id="前序遍历根左右"><a class="markdownIt-Anchor" href="#前序遍历根左右"></a> 前序遍历（根左右）</h3><h5 id="方法-在每个节点左侧画一个圈-从根节点出发-沿着圈画线"><a class="markdownIt-Anchor" href="#方法-在每个节点左侧画一个圈-从根节点出发-沿着圈画线"></a> (方法: 在每个节点左侧画一个圈, 从根节点出发, 沿着圈画线)</h5><p><img src="https://img.dexbug.com/i/2025/03/25/tx1r9i.jpg" alt="前序" /></p><h3 id="中序遍历左根右"><a class="markdownIt-Anchor" href="#中序遍历左根右"></a> 中序遍历（左根右）</h3><h5 id="方法-在每个节点下方画一个圈-从根节点出发-沿着圈画线"><a class="markdownIt-Anchor" href="#方法-在每个节点下方画一个圈-从根节点出发-沿着圈画线"></a> (方法: 在每个节点下方画一个圈, 从根节点出发, 沿着圈画线)</h5><p><img src="https://img.dexbug.com/i/2025/03/25/tx1thz.jpg" alt="中序" /></p><h3 id="后序遍历左右根"><a class="markdownIt-Anchor" href="#后序遍历左右根"></a> 后序遍历（左右根）</h3><h5 id="方法-在每个节点右侧画一个圈-从根节点出发-沿着圈画线"><a class="markdownIt-Anchor" href="#方法-在每个节点右侧画一个圈-从根节点出发-沿着圈画线"></a> (方法: 在每个节点右侧画一个圈, 从根节点出发, 沿着圈画线)</h5><p><img src="https://img.dexbug.com/i/2025/03/25/tx1i4y.jpg" alt="后序" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>二叉树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>gcd &amp;&amp; ecgcd</title>
     <link href="/2025/02/05/gcd/"/>
     <url>/2025/02/05/gcd/</url>
