@@ -19,23 +19,23 @@
   <meta name="author" content="linyisu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="拓扑排序 auto TopoSort &#x3D; [&amp;](auto &amp;self) -&gt; vector&lt;int&gt; &#123;     vector&lt;int&gt; arr;     vector&lt;bool&gt; vis(n + 1, false);     priority_queue&lt;int&gt; q;     for (int i&#x3D;1;i&lt;&#x3D;n;i++)">
+    <meta name="description" content="可分离变量微分方程 判别方式：可通过变化化为形如 f(x)dx&#x3D;g(y)dyf(x)dx&#x3D;g(y)dyf(x)dx&#x3D;g(y)dy 的形式 Solution\mathcal SolutionSolution :  分离变量：将所有 xxx 移一边，所有 yyy 移一边 两边均加上积分符号 两边分别求出不定积分 化简得通解 若有初值，代入初值求特解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拓扑排序">
-<meta property="og:url" content="http://linyisu.github.io/2025/01/16/%E6%A8%A1%E6%9D%BF/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="二阶常系数齐次线性微分方程">
+<meta property="og:url" content="http://linyisu.github.io/2025/03/11/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8F%98%E9%87%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="拓扑排序 auto TopoSort &#x3D; [&amp;](auto &amp;self) -&gt; vector&lt;int&gt; &#123;     vector&lt;int&gt; arr;     vector&lt;bool&gt; vis(n + 1, false);     priority_queue&lt;int&gt; q;     for (int i&#x3D;1;i&lt;&#x3D;n;i++)">
+<meta property="og:description" content="可分离变量微分方程 判别方式：可通过变化化为形如 f(x)dx&#x3D;g(y)dyf(x)dx&#x3D;g(y)dyf(x)dx&#x3D;g(y)dy 的形式 Solution\mathcal SolutionSolution :  分离变量：将所有 xxx 移一边，所有 yyy 移一边 两边均加上积分符号 两边分别求出不定积分 化简得通解 若有初值，代入初值求特解">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-16T12:30:00.000Z">
-<meta property="article:modified_time" content="2025-02-06T02:08:44.472Z">
+<meta property="article:published_time" content="2025-03-11T03:40:00.000Z">
+<meta property="article:modified_time" content="2025-03-26T02:25:23.846Z">
 <meta property="article:author" content="linyisu">
-<meta property="article:tag" content="图论">
-<meta property="article:tag" content="拓扑排序">
+<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="微分方程">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>拓扑排序 - Hexo</title>
+  <title>二阶常系数齐次线性微分方程 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -48,6 +48,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -207,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="拓扑排序"></span>
+            <span id="subtitle" data-typed-text="二阶常系数齐次线性微分方程"></span>
           
         </div>
 
@@ -218,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-16 20:30" pubdate>
-          2025年1月16日 晚上
+        <time datetime="2025-03-11 11:40" pubdate>
+          2025年3月11日 中午
         </time>
       </span>
     
@@ -230,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          77 字
+          94 字
         
       </span>
     
@@ -278,35 +280,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">拓扑排序</h1>
+            <h1 id="seo-header">二阶常系数齐次线性微分方程</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="拓扑排序"><a class="markdownIt-Anchor" href="#拓扑排序"></a> 拓扑排序</h3>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">auto</span> TopoSort <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token operator">&amp;</span>self<span class="token punctuation">)</span> <span class="token operator">-></span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span>
-<span class="token punctuation">&#123;</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> arr<span class="token punctuation">;</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span> <span class="token function">vis</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>in<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>	q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h3 id="可分离变量微分方程"><a class="markdownIt-Anchor" href="#可分离变量微分方程"></a> 可分离变量微分方程</h3>
+<p>判别方式：可通过变化化为形如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">f(x)dx=g(y)dy</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 的形式</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">S</mi><mi>o</mi><mi>l</mi><mi>u</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathcal Solution</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathcal" style="margin-right:0.075em;">S</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span></span></span></span> :</p>
+<ol>
+<li>分离变量：将所有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> 移一边，所有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 移一边</li>
+<li>两边均加上积分符号</li>
+<li>两边分别求出不定积分</li>
+<li>化简得通解</li>
+<li>若有初值，代入初值求特解</li>
+</ol>
 
-    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">auto</span> x <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vis<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        arr<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> to <span class="token operator">:</span> adj<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            in<span class="token punctuation">[</span>to<span class="token punctuation">]</span> <span class="token operator">--</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>in<span class="token punctuation">[</span>to<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>vis<span class="token punctuation">[</span>to<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>to<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
                 
               </div>
             
@@ -324,7 +313,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%A8%A1%E6%9D%BF/" class="category-chain-item">模板</a>
+  <a href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" class="category-chain-item">高等数学</a>
   
   
 
@@ -339,9 +328,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%9B%BE%E8%AE%BA/" class="print-no-link">#图论</a>
+        <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" class="print-no-link">#高等数学</a>
       
-        <a href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" class="print-no-link">#拓扑排序</a>
+        <a href="/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" class="print-no-link">#微分方程</a>
       
     </div>
   
@@ -353,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>拓扑排序</div>
-      <div>http://linyisu.github.io/2025/01/16/模板/拓扑排序/</div>
+      <div>二阶常系数齐次线性微分方程</div>
+      <div>http://linyisu.github.io/2025/03/11/高等数学/可分离变量微分方程/</div>
     </div>
     <div class="license-meta">
       
@@ -366,7 +355,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月16日</div>
+          <div>2025年3月11日</div>
         </div>
       
       
@@ -398,9 +387,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/01/18/hexo/hello-world/" title="Hello World">
+                      <a href="/2025/03/17/%E9%A2%98%E8%A7%A3/2025-03-17-abc-397-%E9%A2%98%E8%A7%A3/" title="abc-397 题解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
+                        <span class="hidden-mobile">abc-397 题解</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -408,8 +397,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/04/%E6%A8%A1%E6%9D%BF/%E7%B4%A0%E6%95%B0%E5%88%A4%E6%96%AD/" title="素数判断">
-                        <span class="hidden-mobile">素数判断</span>
+                      <a href="/2025/03/10/%E9%A2%98%E8%A7%A3/2025-03-10-abc-396-%E9%A2%98%E8%A7%A3/" title="abc-396 题解">
+                        <span class="hidden-mobile">abc-396 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -432,7 +421,7 @@
         var options = Object.assign(
           {"clientID":"Ov23likOzyATad615FeP","clientSecret":"a751648081651593e5b5b6b0b0936e7f247cee89","repo":"linyisu.github.io","owner":"linyisu","admin":["linyisu"],"language":"zh-CN","labels":["Gitalk"],"perPage":15,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","id":""},
           {
-            id: '56e8a4c99e56087fb0863d2132ac2542'
+            id: 'f6b433d34a3a7656b2e73e1a11d93faf'
           }
         )
         var gitalk = new Gitalk(options);
@@ -493,6 +482,11 @@
 
 
   
+
+
+  
+  
+
 
 
 
