@@ -1698,9 +1698,7 @@ mjx-container svg:focus,
 .katex-block {
   overflow-x: auto;
 }
-.katex {
-  user-select: none;
-}
+.katex,
 .mjx-mrow {
   white-space: pre-wrap !important;
 }
