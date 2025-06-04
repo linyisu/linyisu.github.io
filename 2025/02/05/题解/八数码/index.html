@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/profile.jpg">
+  <link rel="icon" href="/img/profile.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="linyisu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="八数码难题【BFS&#x2F;A*&#x2F;双向广搜】  题目描述 在 3×33\times 33×3 的棋盘上，摆有八个棋子，每个棋子上标有 111 至 888 的某一数字。棋盘中留有一个空格，空格用 000 来表示。空格周围的棋子可以移到空格中。要求解的问题是：给出一种初始布局（初始状态）和目标布局（为了使题目简单,设目标状态为 123804765123804765123804765），找到一种最少步骤的移动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八数码">
+<meta property="og:url" content="http://linyisu.github.io/2025/02/05/%E9%A2%98%E8%A7%A3/%E5%85%AB%E6%95%B0%E7%A0%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="八数码难题【BFS&#x2F;A*&#x2F;双向广搜】  题目描述 在 3×33\times 33×3 的棋盘上，摆有八个棋子，每个棋子上标有 111 至 888 的某一数字。棋盘中留有一个空格，空格用 000 来表示。空格周围的棋子可以移到空格中。要求解的问题是：给出一种初始布局（初始状态）和目标布局（为了使题目简单,设目标状态为 123804765123804765123804765），找到一种最少步骤的移动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/7rhxbnup.png">
+<meta property="article:published_time" content="2025-02-05T06:08:16.000Z">
+<meta property="article:modified_time" content="2025-02-05T06:08:29.000Z">
+<meta property="article:author" content="linyisu">
+<meta property="article:tag" content="一题多解">
+<meta property="article:tag" content="A*">
+<meta property="article:tag" content="双向广搜">
+<meta property="article:tag" content="搜索">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/7rhxbnup.png">
+  
+  
+  
+  <title>八数码 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"linyisu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>林一谡のblog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="八数码"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-05 14:08" pubdate>
+          2025年2月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">八数码</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="八数码难题"><a class="markdownIt-Anchor" href="#八数码难题"></a> <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1379">八数码难题</a>【BFS/A*/双向广搜】</h3>
+<h4 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h4>
+<p>在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3\times 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 的棋盘上，摆有八个棋子，每个棋子上标有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 至 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span> 的某一数字。棋盘中留有一个空格，空格用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 来表示。空格周围的棋子可以移到空格中。要求解的问题是：给出一种初始布局（初始状态）和目标布局（为了使题目简单,设目标状态为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>123804765</mn></mrow><annotation encoding="application/x-tex">123804765</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">3</span><span class="mord">8</span><span class="mord">0</span><span class="mord">4</span><span class="mord">7</span><span class="mord">6</span><span class="mord">5</span></span></span></span>），找到一种最少步骤的移动方法，实现从初始布局到目标布局的转变。</p>
+<h4 id="输入格式"><a class="markdownIt-Anchor" href="#输入格式"></a> 输入格式</h4>
+<p>输入初始状态，一行九个数字，空格用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 表示。</p>
+<h4 id="输出格式"><a class="markdownIt-Anchor" href="#输出格式"></a> 输出格式</h4>
+<p>只有一行，该行只有一个数字，表示从初始状态到目标状态需要的最少移动次数。保证测试数据中无特殊无法到达目标状态数据。</p>
+<h4 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">283104765<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h4 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h4 id="提示"><a class="markdownIt-Anchor" href="#提示"></a> 提示</h4>
+<h5 id="样例解释"><a class="markdownIt-Anchor" href="#样例解释"></a> 样例解释</h5>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/7rhxbnup.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p>图中标有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的是空格。绿色格子是空格所在位置，橙色格子是下一步可以移动到空格的位置。如图所示，用四步可以达到目标状态。</p>
+<p>并且可以证明，不存在更优的策略。</p>
+<h4 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h4>
+<p>由于只有一组数据，且只需要算出最短路径长度，因此可直接采用朴素BFS。</p>
+<p>对于每次的搜索，枚举<strong>空白</strong>可移动的四个方向，判断是否会出现越界，重复等情况，如果不会，则加入队列。</p>
+<p>由于棋盘格局是由字符串给出，要想还原空格的位置需要如下代码</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> k <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token char">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> x <span class="token operator">=</span> k <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">,</span> y <span class="token operator">=</span> k <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>此时，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x,y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 即为空白的位置。</p>
+<h4 id="code"><a class="markdownIt-Anchor" href="#code"></a> CODE</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> opx<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> opy<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    string st<span class="token punctuation">;</span>   cin <span class="token operator">>></span> st<span class="token punctuation">;</span>
+    string dst <span class="token operator">=</span> <span class="token string">"123456780"</span><span class="token punctuation">;</span>
+    
+    map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> dist<span class="token punctuation">;</span>
+    queue<span class="token operator">&lt;</span>string<span class="token operator">></span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>st<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dist<span class="token punctuation">[</span>st<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">auto</span> bfs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">int</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">auto</span> cur <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">==</span> dst<span class="token punctuation">)</span> <span class="token keyword">return</span> dist<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> k <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token char">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> x <span class="token operator">=</span> k <span class="token operator">/</span> n<span class="token punctuation">,</span> y <span class="token operator">=</span> k <span class="token operator">%</span> n<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                string tmp <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+                <span class="token keyword">int</span> xx <span class="token operator">=</span> x <span class="token operator">+</span> opx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> yy <span class="token operator">=</span> y <span class="token operator">+</span> opy<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>xx <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> xx <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> yy <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> yy <span class="token operator">&lt;</span> n<span class="token punctuation">)</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token function">swap</span><span class="token punctuation">(</span>tmp<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> tmp<span class="token punctuation">[</span>xx <span class="token operator">*</span> n <span class="token operator">+</span> yy<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dist<span class="token punctuation">[</span>tmp<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">&#123;</span>
+                        q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        dist<span class="token punctuation">[</span>tmp<span class="token punctuation">]</span> <span class="token operator">=</span> dist<span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> inf<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">bfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h2 id="八数码"><a class="markdownIt-Anchor" href="#八数码"></a> <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/181/">八数码</a>【A*/双向广搜】</h2>
+<p>在一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3×3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 的网格中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>∼</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">1 \sim 8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span> 这 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span> 个数字和一个 <code>x</code> 恰好不重不漏地分布在这 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3×3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 的网格中。</p>
+<p>例如：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 2 3
+x 4 6
+7 5 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>在游戏过程中，可以把 <code>x</code> 与其上、下、左、右四个方向之一的数字交换（如果存在）。</p>
+<p>我们的目的是通过交换，使得网格变为如下排列（称为正确排列）：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 2 3
+4 5 6
+7 8 x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>例如，示例中图形就可以通过让 <code>x</code> 先后与右、下、右三个方向的数字交换成功得到正确排列。</p>
+<p>交换过程如下：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 2 3   1 2 3   1 2 3   1 2 3
+x 4 6   4 x 6   4 5 6   4 5 6
+7 5 8   7 5 8   7 x 8   7 8 x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>把 <code>x</code> 与上下左右方向数字交换的行动记录为 <code>u</code>、<code>d</code>、<code>l</code>、<code>r</code>。</p>
+<p>现在，给你一个初始网格，请你通过最少的移动次数，得到正确排列。</p>
+<h4 id="输入格式-2"><a class="markdownIt-Anchor" href="#输入格式-2"></a> 输入格式</h4>
+<p>输入占一行，将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3×3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 的初始网格描绘出来。</p>
+<p>例如，如果初始网格如下所示：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 2 3 
+x 4 6 
+7 5 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>则输入为：<code>1 2 3 x 4 6 7 5 8</code></p>
+<h4 id="输出格式-2"><a class="markdownIt-Anchor" href="#输出格式-2"></a> 输出格式</h4>
+<p>输出占一行，包含一个字符串，表示得到正确排列的完整行动记录。</p>
+<p>如果答案不唯一，输出任意一种合法方案即可。</p>
+<p>如果不存在解决方案，则输出 <code>unsolvable</code>。</p>
+<h4 id="输入样例"><a class="markdownIt-Anchor" href="#输入样例"></a> 输入样例：</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">2 3 4 1 5 x 7 6 8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h4 id="输出样例"><a class="markdownIt-Anchor" href="#输出样例"></a> 输出样例</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-nginx" data-language="nginx"><code class="language-nginx">ullddrurdllurdruldr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h4 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h4>
+<p>与上题不同的是，需要输出操作路径。</p>
+<p>因此，需要用一个<code>unordered_map</code>记录前一个棋盘格局和从前一个棋盘格局到当前棋盘格局的方式。</p>
+<p>此外，<code>A*算法</code>的估价函数f采用的是当前棋盘格局到目标棋盘格局每个棋子需要走的曼哈顿距离之和。</p>
+<h4 id="code-2"><a class="markdownIt-Anchor" href="#code-2"></a> CODE</h4>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'x'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> t <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token char">'1'</span><span class="token punctuation">;</span>
+            d <span class="token operator">+=</span> <span class="token function">abs</span><span class="token punctuation">(</span>t <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">-</span> i <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">abs</span><span class="token punctuation">(</span>t <span class="token operator">%</span> <span class="token number">3</span> <span class="token operator">-</span> i <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> d<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> opx<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> opy<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> chose<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token char">'u'</span><span class="token punctuation">,</span> <span class="token char">'r'</span><span class="token punctuation">,</span> <span class="token char">'d'</span><span class="token punctuation">,</span> <span class="token char">'l'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+string <span class="token function">bfs</span><span class="token punctuation">(</span>string st<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    priority_queue<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> string<span class="token operator">></span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> string<span class="token operator">>></span><span class="token punctuation">,</span> greater<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> string<span class="token operator">>></span><span class="token operator">></span> q<span class="token punctuation">;</span>
+    unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> dist<span class="token punctuation">;</span>
+    unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">bool</span><span class="token operator">></span> vis<span class="token punctuation">;</span>
+    unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">>></span> pre<span class="token punctuation">;</span>
+    string dst <span class="token operator">=</span> <span class="token string">"12345678x"</span><span class="token punctuation">;</span>
+
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token function">f</span><span class="token punctuation">(</span>st<span class="token punctuation">)</span><span class="token punctuation">,</span> st<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dist<span class="token punctuation">[</span>st<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">auto</span> <span class="token punctuation">[</span>_<span class="token punctuation">,</span> cur<span class="token punctuation">]</span> <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">==</span> dst<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>vis<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        vis<span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> k <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token char">'x'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> x <span class="token operator">=</span> k <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">,</span> y <span class="token operator">=</span> k <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> xx <span class="token operator">=</span> x <span class="token operator">+</span> opx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> yy <span class="token operator">=</span> y <span class="token operator">+</span> opy<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>xx <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> xx <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> yy <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> yy <span class="token operator">&lt;</span> n<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                string tmp <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+                <span class="token function">swap</span><span class="token punctuation">(</span>tmp<span class="token punctuation">[</span>x <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">+</span> y<span class="token punctuation">]</span><span class="token punctuation">,</span> tmp<span class="token punctuation">[</span>xx <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">+</span> yy<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dist<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span> <span class="token operator">||</span> dist<span class="token punctuation">[</span>tmp<span class="token punctuation">]</span> <span class="token operator">></span> dist<span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">&#123;</span>
+                    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>dist<span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token function">f</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">,</span> tmp<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    dist<span class="token punctuation">[</span>tmp<span class="token punctuation">]</span> <span class="token operator">=</span> dist<span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    pre<span class="token punctuation">[</span>tmp<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>cur<span class="token punctuation">,</span> chose<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    string path <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>dst <span class="token operator">!=</span> st<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        path <span class="token operator">+=</span> pre<span class="token punctuation">[</span>dst<span class="token punctuation">]</span><span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+        dst <span class="token operator">=</span> pre<span class="token punctuation">[</span>dst<span class="token punctuation">]</span><span class="token punctuation">.</span>first<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token function">rall</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    string ch<span class="token punctuation">,</span> st<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token operator">*</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cin <span class="token operator">>></span> ch<span class="token punctuation">;</span>
+        st <span class="token operator">+=</span> ch<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">auto</span> chk <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">bool</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'x'</span> <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'x'</span><span class="token punctuation">)</span>
+                    cnt <span class="token operator">+=</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>cnt <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">chk</span><span class="token punctuation">(</span>st<span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"unsolvable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>    cout <span class="token operator">&lt;&lt;</span> <span class="token function">bfs</span><span class="token punctuation">(</span>st<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A2%98%E8%A7%A3/" class="category-chain-item">题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/" class="print-no-link">#一题多解</a>
+      
+        <a href="/tags/A/" class="print-no-link">#A*</a>
+      
+        <a href="/tags/%E5%8F%8C%E5%90%91%E5%B9%BF%E6%90%9C/" class="print-no-link">#双向广搜</a>
+      
+        <a href="/tags/%E6%90%9C%E7%B4%A2/" class="print-no-link">#搜索</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>八数码</div>
+      <div>http://linyisu.github.io/2025/02/05/题解/八数码/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>linyisu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/05/%E9%A2%98%E8%A7%A3/%E6%96%B9%E6%A0%BC%E5%8F%96%E6%95%B0/" title="方格取数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">方格取数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/05/%E6%A8%A1%E6%9D%BF/%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/" title="遍历二叉树">
+                        <span class="hidden-mobile">遍历二叉树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23likOzyATad615FeP","clientSecret":"a751648081651593e5b5b6b0b0936e7f247cee89","repo":"linyisu.github.io","owner":"linyisu","admin":["linyisu"],"language":"zh-CN","labels":["Gitalk"],"perPage":15,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","id":""},
+          {
+            id: 'efe16e674a6ade9b73129cdf08e9c19c'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
