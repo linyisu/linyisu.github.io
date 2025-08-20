@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { projects } from '../../projects.data'
-import ProjectCard from '../../components/ProjectCard.vue'
+  import { projects } from '../projects.data'
+  import ProjectCard from '../components/ProjectCard.vue'
 
-// 按分类分组
-const categories = [...new Set(projects.map(p => p.category))]
-const projectsByCategory = categories.map(cat => ({
-  name: cat,
-  projects: projects.filter(p => p.category === cat),
-}))
+  const categories = [...new Set(projects.map(p => p.category))]
+  const projectsByCategory = categories.map(cat => ({
+    name: cat,
+    projects: projects.filter(p => p.category === cat),
+  }))
 </script>
 
 <template>
