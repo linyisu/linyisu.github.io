@@ -26,7 +26,7 @@ export default defineValaxyConfig<UserThemeConfig>({
     pages: [
       {
         name: '项目',
-        url: '/alonePage/',
+        url: '/projects/',
         icon: 'i-ri-code-s-slash-line',
         color: '#F48FB1',
       },
