@@ -32,12 +32,14 @@ export default defineSiteConfig({
     enable: true
   },
 
-  // 开启字数与阅读时间统计
+  frontmatter: {
+    comment: true,
+  },
+
   statistics: {
     enable: true,
   },
 
-  // 开启图片点击放大功能
   mediumZoom: {
     enable: true,
   },

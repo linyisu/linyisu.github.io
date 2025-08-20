@@ -16,7 +16,7 @@ export default defineValaxyConfig<UserThemeConfig>({
   themeConfig: {
     banner: {
       enable: true,
-      title: "linyisu's blog",
+      title: "林一谡的小站",
     },
 
     colors: {
