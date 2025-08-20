@@ -7,19 +7,22 @@ defineProps<{
 </script>
 
 <template>
-  <div class="project-card group border border-gray-200 dark:border-gray-700 rounded-xl p-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-800">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center">
-        <div v-if="project.icon" class="text-3xl" :class="project.icon" />
-        <h3 class="text-lg font-semibold ml-2">
-          {{ project.name }}
-        </h3>
+  <div class="project-card flex flex-col border border-gray-200 dark:border-gray-700 rounded-xl transition-all hover:shadow-lg">
+    <div class="flex-grow p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <div v-if="project.icon" class="text-3xl" :class="project.icon" />
+          <h3 class="text-lg font-semibold ml-2">
+            {{ project.name }}
+          </h3>
+        </div>
       </div>
+      <p class="text-sm text-gray-500 mt-2 min-h-10">
+        {{ project.desc }}
+      </p>
     </div>
-    <p class="text-sm text-gray-500 mt-2 h-10">
-      {{ project.desc }}
-    </p>
-    <div class="text-right mt-4 opacity-50 group-hover:opacity-100 transition-opacity">
+
+    <div class="flex justify-end gap-x-2 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-b-xl">
       <a v-if="project.link" :href="project.link" target="_blank" class="text-2xl p-1 hover:text-blue-500" title="访问站点">
         <div class="i-ri-global-line" />
       </a>

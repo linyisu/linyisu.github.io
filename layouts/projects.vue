@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <div class="p-4 sm:p-8">
+  <div class="p-4 sm:p-8 mt-8">
     <div v-for="categoryGroup in projectsByCategory" :key="categoryGroup.name" class="mb-12">
       <h2 class="text-2xl font-bold mb-4">
         {{ categoryGroup.name }}
