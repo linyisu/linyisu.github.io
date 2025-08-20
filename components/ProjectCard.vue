@@ -7,27 +7,40 @@ defineProps<{
 </script>
 
 <template>
-  <div class="project-card flex flex-col border border-gray-200 dark:border-gray-700 rounded-xl transition-all hover:shadow-lg">
-    <div class="flex-grow p-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <div v-if="project.icon" class="text-3xl" :class="project.icon" />
-          <h3 class="text-lg font-semibold ml-2">
-            {{ project.name }}
-          </h3>
-        </div>
+  <div
+    class="project-card flex flex-col rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+    :style="{ background: project.bg || '#fff' }"
+  >
+    <component
+      :is="project.link ? 'a' : 'div'"
+      :href="project.link"
+      target="_blank"
+      class="flex-grow p-4 block text-white"
+    >
+      <div v-if="project.headIcon" class="text-2xl mb-2">
+        {{ project.headIcon }}
       </div>
-      <p class="text-sm text-gray-500 mt-2 min-h-10">
+
+      <div class="flex items-center">
+        <div v-if="project.icon" class="text-3xl" :class="project.icon" />
+        <h3 class="text-lg font-semibold ml-2">
+          {{ project.name }}
+        </h3>
+      </div>
+      <p class="text-sm opacity-80 mt-2 min-h-10">
         {{ project.desc }}
       </p>
-    </div>
+    </component>
 
-    <div class="flex justify-end gap-x-2 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-b-xl">
-      <a v-if="project.link" :href="project.link" target="_blank" class="text-2xl p-1 hover:text-blue-500" title="访问站点">
-        <div class="i-ri-global-line" />
+    <div class="flex text-white/80 border-t border-white/20">
+      <a v-if="project.link" :href="project.link" target="_blank" class="flex-1 text-center p-2 text-2xl transition-colors hover:bg-black/10 hover:text-white" title="访问站点">
+        <div class="i-ri-global-line mx-auto" />
       </a>
-      <a v-if="project.repo" :href="project.repo" target="_blank" class="text-2xl p-1 hover:text-black dark:hover:text-white" title="查看源码">
-        <div class="i-ri-github-line" />
+      <a v-if="project.docs" :href="project.docs" target="_blank" class="flex-1 text-center p-2 text-2xl transition-colors hover:bg-black/10 hover:text-white border-l border-white/20" title="查看文档">
+        <div class="i-ri-book-line mx-auto" />
+      </a>
+      <a v-if="project.repo" :href="project.repo" target="_blank" class="flex-1 text-center p-2 text-2xl transition-colors hover:bg-black/10 hover:text-white border-l border-white/20" title="查看源码">
+        <div class="i-ri-github-line mx-auto" />
       </a>
     </div>
   </div>
