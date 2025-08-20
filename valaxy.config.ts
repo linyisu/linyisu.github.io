@@ -16,7 +16,7 @@ export default defineValaxyConfig<UserThemeConfig>({
   themeConfig: {
     banner: {
       enable: true,
-      title: '林一谡的小站',
+      title: "linyisu's blog",
     },
 
     colors: {
@@ -57,10 +57,24 @@ export default defineValaxyConfig<UserThemeConfig>({
         url: 'https://linyisu.github.io/posts',
         title: '回到首页'
       },
-      beian: {
-        enable: false
-      },
     },
+
+    // comment: {
+    //   enable: true,
+    //   type: 'giscus',
+    //   giscus: {
+    //     repo: 'linyisu/linyisu.github.io',
+    //     repoId: 'R_kgDOPhOcSg',
+    //     category: 'Announcements',
+    //     categoryId: 'DIC_kwDOPhOcSs4CuZE1',
+    //     mapping: 'pathname',
+    //     reactionsEnabled: '1',
+    //     inputPosition: 'top',
+    //     theme: 'preferred_color_scheme',
+    //     lang: 'zh-CN',
+    //     loading: 'lazy',
+    //   },
+    // },
   },
 
   unocss: { safelist },
