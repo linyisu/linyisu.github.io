@@ -42,7 +42,6 @@ declare module 'vue-router/auto-routes' {
     '/problems/友好城市': RouteRecordInfo<'/problems/友好城市', '/problems/友好城市', Record<never, never>, Record<never, never>>,
     '/problems/合并石子': RouteRecordInfo<'/problems/合并石子', '/problems/合并石子', Record<never, never>, Record<never, never>>,
     '/problems/奶酪': RouteRecordInfo<'/problems/奶酪', '/problems/奶酪', Record<never, never>, Record<never, never>>,
-    '/problems/导弹防御系统': RouteRecordInfo<'/problems/导弹防御系统', '/problems/导弹防御系统', Record<never, never>, Record<never, never>>,
     '/problems/拦截导弹': RouteRecordInfo<'/problems/拦截导弹', '/problems/拦截导弹', Record<never, never>, Record<never, never>>,
     '/problems/方格取数': RouteRecordInfo<'/problems/方格取数', '/problems/方格取数', Record<never, never>, Record<never, never>>,
     '/problems/校门外的树（增强版）': RouteRecordInfo<'/problems/校门外的树（增强版）', '/problems/校门外的树（增强版）', Record<never, never>, Record<never, never>>,
@@ -158,10 +157,6 @@ declare module 'vue-router/auto-routes' {
     }
     'pages/problems/奶酪.md': {
       routes: '/problems/奶酪'
-      views: never
-    }
-    'pages/problems/导弹防御系统.md': {
-      routes: '/problems/导弹防御系统'
       views: never
     }
     'pages/problems/拦截导弹.md': {
