@@ -1,22 +1,87 @@
 <script setup lang="ts">
-  import { projects } from '../projects.data'
-  import ProjectCard from '../components/ProjectCard.vue'
+import { usePage } from 'valaxy'
+import { computed, ref } from 'vue'
 
-  const categories = [...new Set(projects.map(p => p.category))]
-  const projectsByCategory = categories.map(cat => ({
-    name: cat,
-    projects: projects.filter(p => p.category === cat),
-  }))
+const { frontmatter } = usePage()
+const projects = computed(() => frontmatter.projects || {})
+const categories = computed(() => Object.keys(projects.value).map(key => ({
+  key,
+  title: projects.value[key].title,
+  emoji: projects.value[key].emoji,
+})))
+
+const activeCategoryKey = ref('all')
+
+const filteredProjects = computed(() => {
+  if (activeCategoryKey.value === 'all')
+    return projects.value
+
+  const result: typeof projects.value = {}
+  result[activeCategoryKey.value] = projects.value[activeCategoryKey.value]
+  return result
+})
+
+function getGithubLink(github: string) {
+  return `https://github.com/${github}`
+}
 </script>
 
 <template>
-  <div class="p-4 sm:p-8 mt-8">
-    <div v-for="categoryGroup in projectsByCategory" :key="categoryGroup.name" class="mb-12">
+  <div class="p-4 sm:p-8 mt-16">
+    <h1 class="text-3xl font-bold text-center mb-8">
+      {{ frontmatter.title }}
+    </h1>
+
+    <div class="flex justify-center flex-wrap gap-4 mb-12">
+      <button
+        class="flex items-center gap-x-2 px-4 py-2 text-sm rounded-full transition-colors"
+        :class="activeCategoryKey === 'all' ? 'bg-blue-500 text-white shadow-md' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'"
+        @click="activeCategoryKey = 'all'"
+      >
+        <span>全部</span>
+      </button>
+      <button
+        v-for="cat in categories"
+        :key="cat.key"
+        class="flex items-center gap-x-2 px-4 py-2 text-sm rounded-full transition-colors"
+        :class="activeCategoryKey === cat.key ? 'bg-blue-500 text-white shadow-md' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'"
+        @click="activeCategoryKey = cat.key"
+      >
+        <span>{{ cat.emoji }}</span>
+        <span>{{ cat.title }}</span>
+      </button>
+    </div>
+
+    <div v-for="(group, key) in filteredProjects" :key="key" class="mb-12">
       <h2 class="text-2xl font-bold mb-4">
-        {{ categoryGroup.name }}
+        {{ group.title }}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <ProjectCard v-for="p in categoryGroup.projects" :key="p.name" :project="p" />
+        <div
+          v-for="p in group.collection" :key="p.name"
+          class="project-card flex flex-col rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl text-white"
+          :style="{ background: p.color }"
+        >
+          <a :href="p.url" target="_blank" class="flex-grow p-4 block">
+            <div class="text-2xl mb-2">
+              {{ p.emoji }}
+            </div>
+            <h3 class="text-lg font-bold">
+              {{ p.name }}
+            </h3>
+            <p class="text-sm opacity-80 mt-2 min-h-10">
+              {{ p.desc }}
+            </p>
+          </a>
+          <div v-if="p.url || p.github" class="flex border-t border-white/20">
+            <a v-if="p.url" :href="p.url" target="_blank" class="flex-1 text-center p-2 text-2xl transition-colors hover:bg-black/10" title="访问站点">
+              <div class="i-ri-global-line mx-auto" />
+            </a>
+            <a v-if="p.github" :href="getGithubLink(p.github)" target="_blank" class="flex-1 text-center p-2 text-2xl transition-colors hover:bg-black/10 border-l border-white/20" title="查看源码">
+              <div class="i-ri-github-line mx-auto" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
