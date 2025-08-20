@@ -59,22 +59,22 @@ export default defineValaxyConfig<UserThemeConfig>({
       },
     },
 
-    // comment: {
-    //   enable: true,
-    //   type: 'giscus',
-    //   giscus: {
-    //     repo: 'linyisu/linyisu.github.io',
-    //     repoId: 'R_kgDOPhOcSg',
-    //     category: 'Announcements',
-    //     categoryId: 'DIC_kwDOPhOcSs4CuZE1',
-    //     mapping: 'pathname',
-    //     reactionsEnabled: '1',
-    //     inputPosition: 'top',
-    //     theme: 'preferred_color_scheme',
-    //     lang: 'zh-CN',
-    //     loading: 'lazy',
-    //   },
-    // },
+    comment: {
+      enable: true,
+      type: 'giscus',
+      giscus: {
+        repo: 'linyisu/linyisu.github.io',
+        repoId: 'R_kgDOPhOcSg',
+        category: 'Announcements',
+        categoryId: 'DIC_kwDOPhOcSs4CuZE1',
+        mapping: 'pathname',
+        reactionsEnabled: '1',
+        inputPosition: 'top',
+        theme: 'preferred_color_scheme',
+        lang: 'zh-CN',
+        loading: 'lazy',
+      },
+    },
   },
 
   unocss: { safelist },
