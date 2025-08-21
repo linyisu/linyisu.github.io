@@ -32,7 +32,9 @@ declare module 'vue-router/auto-routes' {
     '/links/': RouteRecordInfo<'/links/', '/links', Record<never, never>, Record<never, never>>,
     '/page/[page]': RouteRecordInfo<'/page/[page]', '/page/:page', { page: ParamValue<true> }, { page: ParamValue<false> }>,
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
+    '/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南': RouteRecordInfo<'/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南', '/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南', Record<never, never>, Record<never, never>>,
     '/posts/hello-valaxy': RouteRecordInfo<'/posts/hello-valaxy', '/posts/hello-valaxy', Record<never, never>, Record<never, never>>,
+    '/posts/算法与数据结构/4+ 高阶数据结构': RouteRecordInfo<'/posts/算法与数据结构/4+ 高阶数据结构', '/posts/算法与数据结构/4+ 高阶数据结构', Record<never, never>, Record<never, never>>,
     '/posts/线性代数/矩阵': RouteRecordInfo<'/posts/线性代数/矩阵', '/posts/线性代数/矩阵', Record<never, never>, Record<never, never>>,
     '/posts/线性代数/行列式': RouteRecordInfo<'/posts/线性代数/行列式', '/posts/线性代数/行列式', Record<never, never>, Record<never, never>>,
     '/posts/题解/abc396 题解': RouteRecordInfo<'/posts/题解/abc396 题解', '/posts/题解/abc396 题解', Record<never, never>, Record<never, never>>,
@@ -123,8 +125,16 @@ declare module 'vue-router/auto-routes' {
       routes: '/posts/'
       views: never
     }
+    'pages/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南.md': {
+      routes: '/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南'
+      views: never
+    }
     'pages/posts/hello-valaxy.md': {
       routes: '/posts/hello-valaxy'
+      views: never
+    }
+    'pages/posts/算法与数据结构/4+ 高阶数据结构.md': {
+      routes: '/posts/算法与数据结构/4+ 高阶数据结构'
       views: never
     }
     'pages/posts/线性代数/矩阵.md': {
