@@ -25,10 +25,6 @@ declare module 'vue-router/auto-routes' {
     '/about/site': RouteRecordInfo<'/about/site', '/about/site', Record<never, never>, Record<never, never>>,
     '/archives/': RouteRecordInfo<'/archives/', '/archives', Record<never, never>, Record<never, never>>,
     '/categories/': RouteRecordInfo<'/categories/', '/categories', Record<never, never>, Record<never, never>>,
-    '/database/': RouteRecordInfo<'/database/', '/database', Record<never, never>, Record<never, never>>,
-    '/database/ds/': RouteRecordInfo<'/database/ds/', '/database/ds', Record<never, never>, Record<never, never>>,
-    '/database/oop/': RouteRecordInfo<'/database/oop/', '/database/oop', Record<never, never>, Record<never, never>>,
-    '/database/oop/00.熟悉环境': RouteRecordInfo<'/database/oop/00.熟悉环境', '/database/oop/00/熟悉环境', Record<never, never>, Record<never, never>>,
     '/links/': RouteRecordInfo<'/links/', '/links', Record<never, never>, Record<never, never>>,
     '/page/[page]': RouteRecordInfo<'/page/[page]', '/page/:page', { page: ParamValue<true> }, { page: ParamValue<false> }>,
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
@@ -93,22 +89,6 @@ declare module 'vue-router/auto-routes' {
     }
     'pages/categories/index.md': {
       routes: '/categories/'
-      views: never
-    }
-    'pages/database/index.md': {
-      routes: '/database/'
-      views: never
-    }
-    'pages/database/ds/index.md': {
-      routes: '/database/ds/'
-      views: never
-    }
-    'pages/database/oop/index.md': {
-      routes: '/database/oop/'
-      views: never
-    }
-    'pages/database/oop/00.熟悉环境.md': {
-      routes: '/database/oop/00.熟悉环境'
       views: never
     }
     'pages/links/index.md': {
