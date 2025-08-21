@@ -16,7 +16,7 @@ export function generateSidebar(folder: string) {
   const courses: Record<string, { text: string; link: string }[]> = {}
 
   // 遍历每个文件
-  files.forEach((file) => {
+  files.forEach((file: string) => {
     // 读取文件内容并解析 Frontmatter
     const { data } = matter.read(file)
     if (data.title && data.category) {

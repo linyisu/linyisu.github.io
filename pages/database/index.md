@@ -1,6 +1,7 @@
 ---
 title: 课程代码库
 subtitle: 探索各种编程和技术课程的代码
+sidebar: true
 cards:
   - name: 面向对象
     url: /database/oop/
