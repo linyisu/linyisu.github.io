@@ -22,10 +22,10 @@ export function generateSidebar(folder: string) {
     if (data.title && data.category) {
       if (!courses[data.category])
         courses[data.category] = []
-      
+
       // 生成链接，去掉 'pages' 前缀和 '.md' 后缀
       const link = `/${file.replace(/^pages/, '').replace(/\.md$/, '')}`
-      
+
       courses[data.category].push({
         text: data.title,
         link,
@@ -33,7 +33,12 @@ export function generateSidebar(folder: string) {
     }
   })
 
-  // 转换成 Valaxy sidebar 需要的最终格式
+  console.log('Generated Sidebar:', Object.entries(courses).map(([categoryName, items]) => {
+    return {
+      text: categoryName,
+      items,
+    }
+  }))
   return Object.entries(courses).map(([categoryName, items]) => {
     return {
       text: categoryName,

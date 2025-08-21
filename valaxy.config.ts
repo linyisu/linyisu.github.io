@@ -1,6 +1,6 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
-import { generateSidebar } from './utils/sidebar'
+import { generateSidebar } from 'utils/sidebar'
 
 const databaseSidebar = generateSidebar('database')
 
