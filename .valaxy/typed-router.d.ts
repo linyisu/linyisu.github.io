@@ -23,9 +23,12 @@ declare module 'vue-router/auto-routes' {
     '/404': RouteRecordInfo<'/404', '/404', Record<never, never>, Record<never, never>>,
     '/about/': RouteRecordInfo<'/about/', '/about', Record<never, never>, Record<never, never>>,
     '/about/site': RouteRecordInfo<'/about/site', '/about/site', Record<never, never>, Record<never, never>>,
-    '/alonePage/': RouteRecordInfo<'/alonePage/', '/alonePage', Record<never, never>, Record<never, never>>,
     '/archives/': RouteRecordInfo<'/archives/', '/archives', Record<never, never>, Record<never, never>>,
     '/categories/': RouteRecordInfo<'/categories/', '/categories', Record<never, never>, Record<never, never>>,
+    '/database/': RouteRecordInfo<'/database/', '/database', Record<never, never>, Record<never, never>>,
+    '/database/ds/': RouteRecordInfo<'/database/ds/', '/database/ds', Record<never, never>, Record<never, never>>,
+    '/database/oop/': RouteRecordInfo<'/database/oop/', '/database/oop', Record<never, never>, Record<never, never>>,
+    '/database/oop/00.熟悉环境': RouteRecordInfo<'/database/oop/00.熟悉环境', '/database/oop/00/熟悉环境', Record<never, never>, Record<never, never>>,
     '/links/': RouteRecordInfo<'/links/', '/links', Record<never, never>, Record<never, never>>,
     '/page/[page]': RouteRecordInfo<'/page/[page]', '/page/:page', { page: ParamValue<true> }, { page: ParamValue<false> }>,
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
@@ -49,6 +52,7 @@ declare module 'vue-router/auto-routes' {
     '/problems/租用游艇': RouteRecordInfo<'/problems/租用游艇', '/problems/租用游艇', Record<never, never>, Record<never, never>>,
     '/problems/能量项链': RouteRecordInfo<'/problems/能量项链', '/problems/能量项链', Record<never, never>, Record<never, never>>,
     '/problems/解题笔记': RouteRecordInfo<'/problems/解题笔记', '/problems/解题笔记', Record<never, never>, Record<never, never>>,
+    '/projects/': RouteRecordInfo<'/projects/', '/projects', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
 
@@ -83,16 +87,28 @@ declare module 'vue-router/auto-routes' {
       routes: '/about/site'
       views: never
     }
-    'pages/alonePage/index.md': {
-      routes: '/alonePage/'
-      views: never
-    }
     'pages/archives/index.md': {
       routes: '/archives/'
       views: never
     }
     'pages/categories/index.md': {
       routes: '/categories/'
+      views: never
+    }
+    'pages/database/index.md': {
+      routes: '/database/'
+      views: never
+    }
+    'pages/database/ds/index.md': {
+      routes: '/database/ds/'
+      views: never
+    }
+    'pages/database/oop/index.md': {
+      routes: '/database/oop/'
+      views: never
+    }
+    'pages/database/oop/00.熟悉环境.md': {
+      routes: '/database/oop/00.熟悉环境'
       views: never
     }
     'pages/links/index.md': {
@@ -185,6 +201,10 @@ declare module 'vue-router/auto-routes' {
     }
     'pages/problems/解题笔记.md': {
       routes: '/problems/解题笔记'
+      views: never
+    }
+    'pages/projects/index.md': {
+      routes: '/projects/'
       views: never
     }
     'pages/tags/index.md': {

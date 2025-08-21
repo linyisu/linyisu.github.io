@@ -1,5 +1,8 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
+import { generateSidebar } from 'utils/sidebar'
+
+const databaseSidebar = generateSidebar('database')
 
 // add icons what you will need
 const safelist = [
@@ -36,7 +39,16 @@ export default defineValaxyConfig<UserThemeConfig>({
         icon: 'i-ri-open-arm-line',
         color: '#2DD4BF',
       },
+      {
+        name: '课程代码',
+        url: '/database/',
+        icon: 'i-ri-database-2-line',
+      },
     ],
+
+    sidebar: {
+      '/database/': databaseSidebar,
+    },
 
     say: {
       enable: true,
