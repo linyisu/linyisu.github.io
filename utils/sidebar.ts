@@ -7,7 +7,7 @@ import path from 'node:path'
  * @param folder - 要扫描的文件夹，比如 'database'
  */
 export function generateSidebar(folder: string) {
-  // 找到 pages/folder/ 下的所有 .md 文件，忽略 index.md
+  // 找到 pages/folder/ 下的所有 .md 文件，包括子文件夹，但忽略 index.md
   const files = glob.sync(`pages/${folder}/**/*.md`, {
     ignore: `pages/${folder}/index.md`,
   })

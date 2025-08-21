@@ -1,7 +1,6 @@
 ---
 title: 我的小项目们
 layout: projects
-comment: true
 
 # 项目数据都写在这里
 projects:

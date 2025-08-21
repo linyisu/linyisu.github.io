@@ -1,13 +1,13 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
-import { generateSidebar } from 'utils/sidebar'
+import { generateSidebar } from './utils/sidebar'
 
 const databaseSidebar = generateSidebar('database')
 
 // add icons what you will need
-const safelist = [
-  'i-ri-home-line',
-]
+// const safelist = [
+//   'i-ri-home-line',
+// ]
 
 /**
  * User Config
@@ -70,25 +70,5 @@ export default defineValaxyConfig<UserThemeConfig>({
         title: '回到首页'
       },
     },
-
-    //   comment: {
-    //     enable: true,
-    //     type: 'giscus',
-    //     giscus: {
-    //       repo: 'linyisu/linyisu.github.io',
-    //       repoId: 'R_kgDOPhOcSg',
-    //       category: 'Announcements',
-    //       categoryId: 'DIC_kwDOPhOcSs4CuZE1',
-    //       mapping: 'pathname',
-    //       reactionsEnabled: '1',
-    //       inputPosition: 'top',
-    //       theme: 'preferred_color_scheme',
-    //       lang: 'zh-CN',
-    //       loading: 'lazy',
-    //     },
-    //   },
-    // },
-
-    // unocss: { safelist },
   },
 })
