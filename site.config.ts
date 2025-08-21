@@ -17,19 +17,19 @@ export default defineSiteConfig({
    {
       name: 'GitHub',
       link: 'https://github.com/linyisu',
-      icon: 'i-ri-github-line',
+      icon: 'i-ri-github-fill',
       color: '#000000',
    },
    {
       name: 'E-Mail',
       link: 'mailto:linyisu1024@163.com',
-      icon: 'i-ri-mail-line',
+      icon: 'i-ri-mail-fill',
       color: '#DC143C',
    },
    {
       name: 'Steam',
       link: 'https://steamcommunity.com/profiles/76561199511686169/',
-      icon: 'i-ri-steam-line',
+      icon: 'i-ri-steam-fill',
       color: '#123F8A',
    },
   ],
