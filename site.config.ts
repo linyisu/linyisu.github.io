@@ -14,18 +14,24 @@ export default defineSiteConfig({
   },
   description: '丝之歌, 什么时候……',
   social: [
-    {
+   {
       name: 'GitHub',
       link: 'https://github.com/linyisu',
-      icon: 'i-ri-github-line',
+      icon: 'i-ri-github-fill',
       color: '#6e5494',
-    },
-    {
+   },
+   {
       name: 'E-Mail',
       link: 'mailto:linyisu1024@163.com',
-      icon: 'i-ri-mail-line',
-      color: '#8E71C1',
-    },
+      icon: 'i-ri-mail-open-fill',
+      color: '#007ACC',
+   },
+   {
+      name: 'Steam',
+      link: 'https://steamcommunity.com/profiles/76561199511686169/',
+      icon: 'i-ri-steam-fill',
+      color: '#26A69A',
+   },
   ],
 
   comment: {
