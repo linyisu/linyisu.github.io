@@ -19,7 +19,7 @@ export default defineSiteConfig({
       name: 'GitHub',
       link: 'https://github.com/linyisu',
       icon: 'i-ri-github-fill',
-      color: '#000000',
+      color: 'var(--va-c-text)',
    },
    {
       name: 'E-Mail',

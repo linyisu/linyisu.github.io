@@ -40,7 +40,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         name: '课程代码',
         url: '/database/',
         icon: 'i-ri-database-2-line',
-        color: '#36454F',
+        color: 'var(--va-c-primary)',
       },
     ],
 
