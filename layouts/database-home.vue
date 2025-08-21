@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useFrontmatter } from 'valaxy/client'
 
 const frontmatter = useFrontmatter()
@@ -36,4 +36,4 @@ const frontmatter = useFrontmatter()
       </a>
     </div>
   </div>
-</template>
+</template> -->
