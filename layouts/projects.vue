@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { usePage } from 'valaxy'
+import { useFrontmatter } from 'valaxy'
 import { computed, ref } from 'vue'
 
-const { frontmatter } = usePage()
+// useFrontmatter 会返回一个 ref，所以我们需要 .value
+const frontmatter = useFrontmatter()
 
-// 增加安全检查，确保 frontmatter.projects 是一个对象
-const projects = computed(() => (frontmatter && frontmatter.projects && typeof frontmatter.projects === 'object') ? frontmatter.projects : {})
+const projects = computed(() => (frontmatter.value && frontmatter.value.projects && typeof frontmatter.value.projects === 'object') ? frontmatter.value.projects : {})
 
 const categories = computed(() => {
-  // 增加安全检查
   if (!projects.value)
     return []
 
   return Object.keys(projects.value).map(key => ({
     key,
-    // 使用可选链 ?. 和后备值 || '' 避免因数据缺失而出错
     title: projects.value[key]?.title || '',
     emoji: projects.value[key]?.emoji || '',
   }))
@@ -25,7 +23,7 @@ const activeCategoryKey = ref('all')
 const filteredProjects = computed(() => {
   if (activeCategoryKey.value === 'all')
     return projects.value
-  
+
   if (!projects.value[activeCategoryKey.value])
     return {}
 
