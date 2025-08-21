@@ -7,12 +7,13 @@ export default defineSiteConfig({
   subtitle: '天天开心',
   author: {
     name: 'linyisu',
+    avatar: "/avatar.png",
     status: {
       emoji: '🌄',
       message: '今天也要加油呀！',
     },
   },
-  description: '丝之歌, 什么时候……',
+  description: '丝之歌……什么时候……',
   social: [
    {
       name: 'GitHub',
