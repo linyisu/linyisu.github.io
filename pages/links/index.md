@@ -1,14 +1,14 @@
 ---
 title: 我的小伙伴们
-date: 2019-06-21 13:06:06
+date: 2014-12-10 12:00:00
 keywords: 链接
 comments: true
-links: https://github.com/linyisu/linyisu.github.io/blob/main/pages/links/friends.json
+links: /links/friends.json
 random: true
 ---
 
 <YunLinks :links="frontmatter.links" :random="frontmatter.random" />
 
-## 友链说明
+### 友链说明
 
 每次刷新为随机顺序展示～
