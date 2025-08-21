@@ -24,8 +24,8 @@ export default defineSiteConfig({
    {
       name: 'E-Mail',
       link: 'mailto:linyisu1024@163.com',
-      icon: 'i-ri-mail-fill',
-      color: '#DC143C',
+      icon: 'i-ri-mail-add-fill',
+      color: '#E8011E',
    },
    {
       name: 'Steam',
