@@ -40,6 +40,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/题解/abc396 题解': RouteRecordInfo<'/posts/题解/abc396 题解', '/posts/题解/abc396 题解', Record<never, never>, Record<never, never>>,
     '/posts/题解/abc397 题解': RouteRecordInfo<'/posts/题解/abc397 题解', '/posts/题解/abc397 题解', Record<never, never>, Record<never, never>>,
     '/posts/题解/SZTU_ACM新生夏令营第一次训练赛': RouteRecordInfo<'/posts/题解/SZTU_ACM新生夏令营第一次训练赛', '/posts/题解/SZTU_ACM新生夏令营第一次训练赛', Record<never, never>, Record<never, never>>,
+    '/posts/题解/SZTU_ACM新生夏令营第四次训练赛': RouteRecordInfo<'/posts/题解/SZTU_ACM新生夏令营第四次训练赛', '/posts/题解/SZTU_ACM新生夏令营第四次训练赛', Record<never, never>, Record<never, never>>,
     '/problems/': RouteRecordInfo<'/problems/', '/problems', Record<never, never>, Record<never, never>>,
     '/problems/八数码': RouteRecordInfo<'/problems/八数码', '/problems/八数码', Record<never, never>, Record<never, never>>,
     '/problems/最大上升子序列和': RouteRecordInfo<'/problems/最大上升子序列和', '/problems/最大上升子序列和', Record<never, never>, Record<never, never>>,
@@ -155,6 +156,10 @@ declare module 'vue-router/auto-routes' {
     }
     'pages/posts/题解/SZTU_ACM新生夏令营第一次训练赛.md': {
       routes: '/posts/题解/SZTU_ACM新生夏令营第一次训练赛'
+      views: never
+    }
+    'pages/posts/题解/SZTU_ACM新生夏令营第四次训练赛.md': {
+      routes: '/posts/题解/SZTU_ACM新生夏令营第四次训练赛'
       views: never
     }
     'pages/problems/index.md': {

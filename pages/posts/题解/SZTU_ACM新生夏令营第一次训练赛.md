@@ -5,6 +5,7 @@ categories:
   - 语法
   - 题解
 abbrlink: 24849
+cover: https://ooo.0x0.ooo/2025/08/22/OfdG9r.jpg
 date: 2025-08-03 21:00:00
 ---
 ## [A - Piling Up](https://vjudge.net/problem/AtCoder-abc363_a)

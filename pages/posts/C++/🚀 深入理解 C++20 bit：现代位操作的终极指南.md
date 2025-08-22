@@ -2,6 +2,7 @@
 title: 🚀 深入理解 C++20 bit：现代位操作的终极指南
 math: true
 categories: C++
+cover: https://ooo.0x0.ooo/2025/08/22/Ofd0vG.png
 date: 2025-08-21 17:15:12
 ---
 
