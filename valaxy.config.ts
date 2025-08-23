@@ -16,7 +16,8 @@ export default defineValaxyConfig<UserThemeConfig>({
   themeConfig: {
     banner: {
       enable: true,
-      title: "林一谡的小站",
+      title: ['林一谡', '的', '小站'],
+      cloud: { enable: true }
     },
 
     colors: {
@@ -31,17 +32,18 @@ export default defineValaxyConfig<UserThemeConfig>({
         color: '#F48FB1',
       },
       {
-        name: '友链',
-        url: '/links/',
-        icon: 'i-ri-open-arm-line',
-        color: '#2DD4BF',
-      },
-      {
         name: '课程代码',
         url: '/database/',
         icon: 'i-ri-database-2-line',
         color: 'var(--va-c-primary)',
       },
+      {
+        name: '友链',
+        url: '/links/',
+        icon: 'i-ri-open-arm-line',
+        color: '#2DD4BF',
+      },
+      
     ],
 
     say: {
