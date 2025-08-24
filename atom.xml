@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://linyisu.github.io/</id>
+    <title>林一谡のblog</title>
+    <updated>2025-08-24T02:27:33.848Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>linyisu</name>
+        <email>i@valaxy.site</email>
+        <uri>https://valaxy.site</uri>
+    </author>
+    <link rel="alternate" href="https://linyisu.github.io/"/>
+    <link rel="self" href="https://linyisu.github.io/atom.xml"/>
+    <subtitle>丝之歌……什么时候……</subtitle>
+    <logo>https://linyisu.github.io/avatar.png</logo>
+    <icon>https://linyisu.github.io/favicon.svg</icon>
+    <rights>CC BY-NC-SA 4.0 2025 © linyisu</rights>
+    <entry>
+        <title type="html"><![CDATA[SZTU_ACM新生夏令营第四次训练赛]]></title>
+        <id>https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第四次训练赛</id>
+        <link href="https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第四次训练赛"/>
+        <updated>2025-08-13T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2><a href="https://vjudge.net/problem/%E7%89%9B%E5%AE%A2-276055">A - ACM中的A题</a></h2>
+<h4>题意</h4>
+<p>给三根木棒长 <code>$a, b, c$</code>，必</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第四次训练赛" target="_blank">https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第四次训练赛</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.908Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[abc-396 题解]]></title>
+        <id>https://linyisu.github.io/posts/题解/abc396 题解</id>
+        <link href="https://linyisu.github.io/posts/题解/abc396 题解"/>
+        <updated>2025-03-10T01:23:17.000Z</updated>
+        <content type="html"><![CDATA[<h2><strong>A - Triple Four</strong></h2>
+<h2>题目描述</h2>
+<p>给定一个长度为 $N$ 的整数序列 $A = (A_1, A_2, \ldots, A_N)$。</p>
+<p>请判断 $A$ 中是否存在连续三</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/题解/abc396 题解" target="_blank">https://linyisu.github.io/posts/题解/abc396 题解</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.908Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[abc-397 题解]]></title>
+        <id>https://linyisu.github.io/posts/题解/abc397 题解</id>
+        <link href="https://linyisu.github.io/posts/题解/abc397 题解"/>
+        <updated>2025-03-17T13:26:10.000Z</updated>
+        <content type="html"><![CDATA[<h2><a href="https://atcoder.jp/contests/abc397/tasks/abc397_c">C - Variety Split Easy</a></h2>
+<h4>题目大意</h4>
+<p>给定一个长度为</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/题解/abc397 题解" target="_blank">https://linyisu.github.io/posts/题解/abc397 题解</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.908Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[🚀 深入理解 C++20 bit：现代位操作的终极指南]]></title>
+        <id>https://linyisu.github.io/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南</id>
+        <link href="https://linyisu.github.io/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南"/>
+        <updated>2025-08-21T17:15:12.000Z</updated>
+        <content type="html"><![CDATA[<h2>📌 引言</h2>
+<p>在系统编程、算法优化、哈希表、位图（<code>bitmap</code>）、编码压缩等领域，<strong>位操作（bit manipulation）</strong> 是提升性能的核心手段。长期以来，开发者依赖 <code>GCC</code></p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南" target="_blank">https://linyisu.github.io/posts/C++/🚀 深入理解 C++20 bit：现代位操作的终极指南</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.907Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[矩阵]]></title>
+        <id>https://linyisu.github.io/posts/线性代数/矩阵</id>
+        <link href="https://linyisu.github.io/posts/线性代数/矩阵"/>
+        <updated>2025-03-24T20:28:06.000Z</updated>
+        <content type="html"><![CDATA[<h3>矩阵计算</h3>
+<p>矩阵通常用二维数组表示, $matrix_{i,j}$ 表示第 $i$ 行，第 $j$ 列。</p>
+<h5>加减</h5>
+<p>只可针对<strong>同型矩阵</strong>，直接对应位置相加减。<br>
+$$<br>
+\lef</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/线性代数/矩阵" target="_blank">https://linyisu.github.io/posts/线性代数/矩阵</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.907Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[行列式]]></title>
+        <id>https://linyisu.github.io/posts/线性代数/行列式</id>
+        <link href="https://linyisu.github.io/posts/线性代数/行列式"/>
+        <updated>2025-03-25T15:18:10.000Z</updated>
+        <content type="html"><![CDATA[<h2>行列式</h2>
+<h3>一、二阶行列式与三阶行列式</h3>
+<h4>二阶行列式</h4>
+<p><strong>定义</strong>：由两行两列四个元素组成的算式，记作 $\left | \begin{matrix}a_{11}&amp; a_{1</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/线性代数/行列式" target="_blank">https://linyisu.github.io/posts/线性代数/行列式</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.907Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SZTU_ACM新生夏令营第一次训练赛]]></title>
+        <id>https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第一次训练赛</id>
+        <link href="https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第一次训练赛"/>
+        <updated>2025-08-03T21:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2><a href="https://vjudge.net/problem/AtCoder-abc363_a">A - Piling Up</a></h2>
+<h4>题意</h4>
+<p>给定当前评级 <code>R</code>（ `$1 \le R \le</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第一次训练赛" target="_blank">https://linyisu.github.io/posts/题解/SZTU_ACM新生夏令营第一次训练赛</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-24T02:25:44.907Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[4+高阶数据结构]]></title>
+        <id>https://linyisu.github.io/posts/算法与数据结构/4+高阶数据结构</id>
+        <link href="https://linyisu.github.io/posts/算法与数据结构/4+高阶数据结构"/>
+        <updated>2025-08-18T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>引入——树的重心</h2>
+<p>什么是<strong>树的重心</strong>呢，和物理学上的重心类似，如果我们挑选<strong>某个节点</strong>作为树的根节点的话，剩下的各个子树大小会<strong>相对接近</strong>，这就是树的重心</p>
+<p>定义：</p>
+<ol>
+<li>以某个节</li>
+</ol>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/算法与数据结构/4+高阶数据结构" target="_blank">https://linyisu.github.io/posts/算法与数据结构/4+高阶数据结构</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-08-22T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello, Valaxy!]]></title>
+        <id>https://linyisu.github.io/posts/hello-valaxy</id>
+        <link href="https://linyisu.github.io/posts/hello-valaxy"/>
+        <updated>2022-04-01T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>Valaxy</h2>
+<p>Next Generation Static Blog Framework.</p>
+<p>Write your first post!</p>
+<h2>Usage</h2>
+<p>Modify `valaxy</p>
+<br/><p>访问 <a href="https://linyisu.github.io/posts/hello-valaxy" target="_blank">https://linyisu.github.io/posts/hello-valaxy</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>linyisu</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2022-04-01T00:00:00.000Z</published>
+    </entry>
+</feed>

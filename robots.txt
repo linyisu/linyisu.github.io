@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://linyisu.github.io/sitemap.xml
