@@ -11,6 +11,13 @@ import {
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
+type Props = {
+	"client:only"?: string;
+};
+
+const { "client:only": clientOnly }: Props = $props();
+void clientOnly;
+
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
