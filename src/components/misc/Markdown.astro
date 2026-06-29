@@ -14,30 +14,174 @@ const className = Astro.props.class;
 </div>
 
 <script>
-document.addEventListener("click", function (e: MouseEvent) {
-    const target = e.target as Element | null;
-    if (target && target.classList.contains("copy-btn")) {
-        const preEle = target.closest("pre");
-        const codeEle = preEle?.querySelector("code");
-        const code = Array.from(codeEle?.querySelectorAll(".code:not(summary *)") ?? [])
-            .map(el => el.textContent)
-            .map(t => t === "\n" ? "" : t)
-            .join("\n");
-        navigator.clipboard.writeText(code);
+const RUST_PLAYGROUND_ENDPOINT = "https://play.rust-lang.org/execute";
 
-        const timeoutId = target.getAttribute("data-timeout-id");
-        if (timeoutId) {
-            clearTimeout(parseInt(timeoutId));
+interface RustPlaygroundResponse {
+    success: boolean;
+    stdout: string;
+    stderr: string;
+    exitDetail: string;
+}
+
+function getCodeFromPre(preEle: Element | null) {
+    const codeEle = preEle?.querySelector("code");
+    return Array.from(codeEle?.querySelectorAll(".code:not(summary *)") ?? [])
+        .map(el => el.textContent)
+        .map(t => t === "\n" ? "" : t)
+        .join("\n");
+}
+
+function getOrCreateRustOutput(preEle: Element) {
+    const host = preEle.closest(".expressive-code") ?? preEle.closest(".frame") ?? preEle.parentElement;
+    if (!host) return null;
+
+    let output = host.querySelector(":scope > .rust-run-output") as HTMLElement | null;
+    if (!output) {
+        output = document.createElement("div");
+        output.className = "rust-run-output";
+        output.setAttribute("aria-live", "polite");
+        host.appendChild(output);
+    }
+    return output;
+}
+
+function renderRustOutput(
+    output: HTMLElement,
+    title: string,
+    sections: { label: string; text: string }[] = [],
+    hasError = false,
+    showEmptySection = true,
+) {
+    output.textContent = "";
+    output.classList.toggle("error", hasError);
+
+    const header = document.createElement("div");
+    header.className = "rust-run-output-header";
+    header.textContent = title;
+    output.appendChild(header);
+
+    const visibleSections = sections.length > 0
+        ? sections
+        : showEmptySection
+            ? [{ label: "output", text: "(no output)" }]
+            : [];
+
+    for (const section of visibleSections) {
+        const stream = document.createElement("div");
+        stream.className = "rust-run-stream";
+
+        const label = document.createElement("div");
+        label.className = "rust-run-stream-label";
+        label.textContent = section.label;
+
+        const body = document.createElement("pre");
+        body.className = "rust-run-stream-body";
+        body.textContent = section.text;
+
+        stream.append(label, body);
+        output.appendChild(stream);
+    }
+}
+
+async function runRustCode(button: HTMLButtonElement) {
+    const preEle = button.closest("pre");
+    if (!preEle) return;
+
+    const code = getCodeFromPre(preEle);
+    const output = getOrCreateRustOutput(preEle);
+    if (!output) return;
+
+    if (!code.trim()) {
+        renderRustOutput(output, "No code to run", [], true);
+        return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+    button.disabled = true;
+    button.classList.add("loading");
+    button.setAttribute("aria-busy", "true");
+    renderRustOutput(output, "Running...", [], false, false);
+
+    try {
+        const response = await fetch(RUST_PLAYGROUND_ENDPOINT, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                channel: "stable",
+                mode: "debug",
+                edition: "2021",
+                crateType: "bin",
+                tests: false,
+                backtrace: false,
+                code,
+            }),
+            signal: controller.signal,
+        });
+
+        const text = await response.text();
+        if (!response.ok) {
+            throw new Error(text || `Rust Playground returned ${response.status}`);
         }
 
-        target.classList.add("success");
+        const result = JSON.parse(text) as RustPlaygroundResponse;
+        const sections = [
+            result.stderr ? { label: "stderr", text: result.stderr } : null,
+            result.stdout ? { label: "stdout", text: result.stdout } : null,
+        ].filter(Boolean) as { label: string; text: string }[];
+
+        renderRustOutput(output, result.success ? "Finished" : "Failed", sections, !result.success);
+    } catch (error) {
+        const message =
+            error instanceof DOMException && error.name === "AbortError"
+                ? "Timed out while waiting for Rust Playground."
+                : error instanceof Error
+                    ? error.message
+                    : "Failed to run code.";
+        renderRustOutput(output, "Request failed", [{ label: "error", text: message }], true);
+    } finally {
+        window.clearTimeout(timeoutId);
+        button.disabled = false;
+        button.classList.remove("loading");
+        button.removeAttribute("aria-busy");
+    }
+}
+
+document.addEventListener("click", function (e: MouseEvent) {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+
+    const copyButton = target.closest("button.copy-btn") as HTMLButtonElement | null;
+    if (copyButton) {
+        e.preventDefault();
+        const preEle = copyButton.closest("pre");
+        const code = getCodeFromPre(preEle);
+        navigator.clipboard.writeText(code);
+
+        const timeoutId = copyButton.getAttribute("data-timeout-id");
+        if (timeoutId) {
+            clearTimeout(parseInt(timeoutId, 10));
+        }
+
+        copyButton.classList.add("success");
 
         // 设置新的timeout并保存ID到按钮的自定义属性中
         const newTimeoutId = setTimeout(() => {
-            target.classList.remove("success");
+            copyButton.classList.remove("success");
         }, 1000);
 
-        target.setAttribute("data-timeout-id", newTimeoutId.toString());
+        copyButton.setAttribute("data-timeout-id", newTimeoutId.toString());
+        return;
+    }
+
+    const rustRunButton = target.closest("button.rust-run-btn") as HTMLButtonElement | null;
+    if (rustRunButton) {
+        e.preventDefault();
+        runRustCode(rustRunButton);
     }
 });
 </script>

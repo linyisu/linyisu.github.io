@@ -1,9 +1,12 @@
+import type { ExpressiveCodePlugin } from "@expressive-code/core";
 import { definePlugin } from "@expressive-code/core";
 import type { Element } from "hast";
 
-export function pluginCustomCopyButton() {
+const runnableRustLanguages = new Set(["rust", "rs"]);
+
+export function pluginCustomCopyButton(): ExpressiveCodePlugin {
 	return definePlugin({
-		name: "Custom Copy Button",
+		name: "Custom Code Actions",
 		hooks: {
 			postprocessRenderedBlock: (context) => {
 				function traverse(node: Element) {
@@ -18,13 +21,41 @@ export function pluginCustomCopyButton() {
 					}
 				}
 
+				function getLanguage(node: Element) {
+					const properties = node.properties ?? {};
+					const rawLanguage =
+						properties["data-language"] ??
+						properties.dataLanguage ??
+						context.codeBlock?.language;
+
+					return String(rawLanguage ?? "").toLowerCase();
+				}
+
+				function addClass(node: Element, className: string) {
+					node.properties ??= {};
+					const existing = node.properties.className;
+					const classes = Array.isArray(existing)
+						? existing.map(String)
+						: typeof existing === "string"
+							? existing.split(/\s+/).filter(Boolean)
+							: [];
+
+					if (!classes.includes(className)) {
+						classes.push(className);
+					}
+					node.properties.className = classes;
+				}
+
 				function processCodeBlock(node: Element) {
+					const language = getLanguage(node);
+					const isRustBlock = runnableRustLanguages.has(language);
 					const copyButton = {
 						type: "element" as const,
 						tagName: "button",
 						properties: {
 							className: ["copy-btn"],
 							"aria-label": "Copy code",
+							title: "Copy code",
 						},
 						children: [
 							{
@@ -77,8 +108,44 @@ export function pluginCustomCopyButton() {
 						],
 					} as Element;
 
+					const rustRunButton = {
+						type: "element" as const,
+						tagName: "button",
+						properties: {
+							className: ["rust-run-btn"],
+							"aria-label": "Run Rust code",
+							title: "Run Rust code",
+							type: "button",
+						},
+						children: [
+							{
+								type: "element" as const,
+								tagName: "svg",
+								properties: {
+									viewBox: "0 -960 960 960",
+									xmlns: "http://www.w3.org/2000/svg",
+									className: ["code-action-icon", "rust-run-icon"],
+								},
+								children: [
+									{
+										type: "element" as const,
+										tagName: "path",
+										properties: {
+											d: "M320-200v-560l440 280-440 280Z",
+										},
+										children: [],
+									},
+								],
+							},
+						],
+					} as Element;
+
 					if (!node.children) {
 						node.children = [];
+					}
+					if (isRustBlock) {
+						addClass(node, "rust-playground-code");
+						node.children.push(rustRunButton);
 					}
 					node.children.push(copyButton);
 				}
