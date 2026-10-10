@@ -4,7 +4,7 @@ published: 2026-10-09
 description: 梳理数字电路底层基础，记录 MOS 管开关模型、CMOS 门电路结构、门延迟特性以及在 Logisim 中的仿真验证。
 tags: [数字电路, 计算机体系结构, Logisim, 硬件基础]
 category: 体系结构
-draft: true
+draft: false
 ---
 
 重新梳理数字电路与计算机体系结构基础，从底层 MOS 管开关特性开始，推导基础门电路拓扑与门延迟现象，并在 Logisim 中完成仿真验证。

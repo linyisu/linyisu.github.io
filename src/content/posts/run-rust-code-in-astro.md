@@ -4,7 +4,7 @@ published: 2026-06-29
 description: 记录如何基于 Astro、Expressive Code 和 Rust Playground，让 Markdown 里的 Rust 代码块可以直接点击运行。
 tags: [Astro, Rust, Markdown, Rust Playground]
 category: Web
-draft: true
+draft: false
 lang: zh_CN
 ---
 
