@@ -3,8 +3,8 @@ title: 在 Astro 中实现可运行的 Rust 代码块
 published: 2026-06-29
 description: 记录如何基于 Astro、Expressive Code 和 Rust Playground，让 Markdown 里的 Rust 代码块可以直接点击运行。
 tags: [Astro, Rust, Markdown, Rust Playground]
-category: 技术
-draft: false
+category: Web
+draft: true
 lang: zh_CN
 ---
 
@@ -170,7 +170,7 @@ function getOrCreateRustOutput(preEle: Element) {
 }
 ```
 
-输出区域沿用代码块的深色背景和等宽字体，让它看起来像当前代码块的一部分，而不是另一张卡片。
+输出区域沿用代码块背景和等宽字体，让它看起来像当前代码块的一部分，而不是另一张卡片。
 
 ## 外部 crates 的限制
 

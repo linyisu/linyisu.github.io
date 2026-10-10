@@ -48,7 +48,7 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 export default defineConfig({
   integrations: [
     expressiveCode({
-      themes: ["github-dark", "github-dark"],
+      themes: ["github-light", "github-dark"],
       plugins: [
         pluginCollapsibleSections(),
         pluginLineNumbers(),
@@ -63,7 +63,7 @@ export default defineConfig({
 
 这段配置说明了三件事：
 
-- 代码块使用 `github-dark` 主题。
+- 代码块在浅色和深色模式下分别使用 `github-light` 和 `github-dark` 主题。
 - 启用了可折叠区块和行号能力。
 - 默认开启 `wrap`，长代码行会自动换行，更适合移动端阅读。
 

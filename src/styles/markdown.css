@@ -48,7 +48,7 @@
         counter-reset: line;
         span.line {
             &:before {
-                @apply text-white/25 mr-4 w-4 inline-block;
+                @apply text-black/30 dark:text-white/25 mr-4 w-4 inline-block;
                 content: counter(line);
                 counter-increment: line;
                 direction: rtl;
@@ -113,24 +113,24 @@
     }
 
     .rust-run-output {
-        @apply mt-2 overflow-hidden rounded-lg border border-white/10 bg-[var(--codeblock-bg)] text-white/75;
+        @apply mt-2 overflow-hidden rounded-lg border border-black/10 bg-[var(--codeblock-bg)] text-black/75 dark:border-white/10 dark:text-white/75;
         font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
     .rust-run-output-header {
-        @apply bg-[var(--codeblock-topbar-bg)] px-3 py-2 text-xs font-bold uppercase tracking-normal text-white/55;
+        @apply bg-[var(--codeblock-topbar-bg)] px-3 py-2 text-xs font-bold uppercase tracking-normal text-black/55 dark:text-white/55;
         letter-spacing: 0;
     }
     .rust-run-output.error .rust-run-output-header {
         color: oklch(0.72 0.17 25);
     }
     .rust-run-stream {
-        @apply border-t border-white/10;
+        @apply border-t border-black/10 dark:border-white/10;
     }
     .rust-run-stream-label {
-        @apply px-3 pt-3 text-xs font-bold text-white/45;
+        @apply px-3 pt-3 text-xs font-bold text-black/45 dark:text-white/45;
     }
     .rust-run-stream-body {
-        @apply m-0 whitespace-pre-wrap break-words bg-transparent px-3 pb-3 pt-1 text-sm leading-6 text-white/80;
+        @apply m-0 whitespace-pre-wrap break-words bg-transparent px-3 pb-3 pt-1 text-sm leading-6 text-black/80 dark:text-white/80;
         font-family: inherit;
     }
 
