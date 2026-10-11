@@ -1,6 +1,7 @@
 ---
 title: Expressive Code：让代码块成为文章的一部分
 published: 2026-05-21
+image: "./cover.png"
 description: 从语法高亮、编辑器窗口、终端窗口、行标记、折叠代码到 Astro 集成，系统介绍 Expressive Code 适合技术博客的写作方式。
 tags: [Expressive Code, Astro, Markdown, 技术写作]
 category: 技术

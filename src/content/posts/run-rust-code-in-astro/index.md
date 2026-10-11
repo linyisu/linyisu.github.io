@@ -1,6 +1,7 @@
 ---
 title: 在 Astro 中实现可运行的 Rust 代码块
 published: 2026-06-29
+image: "./cover.png"
 description: 记录如何基于 Astro、Expressive Code 和 Rust Playground，让 Markdown 里的 Rust 代码块可以直接点击运行。
 tags: [Astro, Rust, Markdown, Rust Playground]
 category: Web
