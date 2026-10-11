@@ -1,80 +1,79 @@
 ---
-title: 在 Astro 中实现可运行的 Rust 代码块
+title: 在 Astro 博客中接入可运行的 Rust 代码块
 published: 2026-06-29
 image: "./cover.png"
-description: 记录如何基于 Astro、Expressive Code 和 Rust Playground，让 Markdown 里的 Rust 代码块可以直接点击运行。
+description: 基于 Expressive Code 插件机制与 Rust Playground API，在静态博客中实现 Rust 代码块的就地编译与执行。
 tags: [Astro, Rust, Markdown, Rust Playground]
 category: Web
 draft: false
 lang: zh_CN
 ---
 
-写技术博客时，代码块通常只能阅读和复制。对 Rust 这种编译型语言来说，如果读者能在文章里直接点击运行，就能更快验证示例，也更容易理解代码行为。
+在静态博客里贴代码示例时，读者往往只能看不能动。对于 Rust 这种带有类型推导和编译器检查的语言，如果必须复制代码到本地建个项目跑 `cargo run`，验证成本就太高了。
 
-这篇文章记录我在 Astro 博客中实现这个功能的过程：在 Markdown 的 Rust 代码块右上角加一个运行按钮，点击后把代码发送到 Rust Playground，再把 `stderr` 和 `stdout` 渲染到代码块下面。
+类似 Rust by Example 或官方文档的做法是：给代码块配一个 "Run" 按钮，直接在页面里调用 [Rust Playground](https://play.rust-lang.org/) 并返回结果。
 
-## 整体思路
+这个博客基于 Astro 构建，代码块由 `astro-expressive-code` 渲染。利用 Expressive Code 的插件机制，可以在 AST 构建期识别出 Rust 代码块并注入操作按钮，再通过前端 JS 转发到 Playground 接口，实现一个就地运行的在线沙箱。
 
-这个博客的 Markdown 代码块由 `astro-expressive-code` 渲染。它的好处是代码块在构建阶段会被转换成一棵 HAST 节点树，我们可以在渲染后处理这棵树，往代码块里插入自定义按钮。
+## 实现思路
 
-实现链路可以拆成三步：
+整个链路分为三块：
 
-1. 在 Expressive Code 插件里识别 `rust` 和 `rs` 代码块。
-2. 给这些代码块注入一个 `Run` 按钮。
-3. 在前端监听按钮点击，调用 Rust Playground 的 `/execute` API。
+1. **AST 扩展**：编写 Expressive Code 插件，在静态构建期识别 `lang="rust"` 或 `lang="rs"` 的代码块，在右上角注入一个运行按钮；
+2. **源码还原**：高亮后的 DOM 包含了大量的 span 标签和行号元素，运行前需要从中准确还原出纯净的代码文本；
+3. **接口联动与输出渲染**：点击按钮后向 Rust Playground 发起请求，将返回的编译日志与标准输出追加在代码块下方。
 
-最终用户在 Markdown 里只需要正常写：
+## 1. 拦截 AST 并注入运行按钮
 
-````md
-```rust
-fn main() {
-    println!("hello rust");
-}
-```
-````
-
-文章渲染后，这个代码块就会自动拥有运行按钮。
-
-## 给 Rust 代码块注入按钮
-
-项目里原本已经有一个自定义复制按钮插件。最省事的做法不是另起一套渲染流程，而是在同一个 Expressive Code 插件里继续扩展代码块操作按钮。
-
-核心逻辑是判断当前代码块语言：
+Expressive Code 在渲染代码块时会生成一套 HAST（HTML 抽象语法树），并暴露了 `postprocessRenderedBlock` 钩子。通过自定义插件，我们可以精准定位到 `<pre>` 节点并插入按钮元素。
 
 ```ts title="src/plugins/expressive-code/custom-copy-button.ts"
+import type { ExpressiveCodePlugin } from "@expressive-code/core";
+import { definePlugin } from "@expressive-code/core";
+import type { Element } from "hast";
+
 const runnableRustLanguages = new Set(["rust", "rs"]);
 
-function getLanguage(node: Element) {
-  const properties = node.properties ?? {};
-  const rawLanguage =
-    properties["data-language"] ??
-    properties.dataLanguage ??
-    context.codeBlock?.language;
+export function pluginCustomCopyButton(): ExpressiveCodePlugin {
+  return definePlugin({
+    name: "Custom Code Actions",
+    hooks: {
+      postprocessRenderedBlock: (context) => {
+        function getLanguage(node: Element) {
+          const properties = node.properties ?? {};
+          const rawLanguage =
+            properties["data-language"] ??
+            properties.dataLanguage ??
+            context.codeBlock?.language;
+          return String(rawLanguage ?? "").toLowerCase();
+        }
 
-  return String(rawLanguage ?? "").toLowerCase();
+        function processCodeBlock(node: Element) {
+          const language = getLanguage(node);
+          if (runnableRustLanguages.has(language)) {
+            addClass(node, "rust-playground-code");
+            node.children.push(rustRunButton);
+          }
+          node.children.push(copyButton);
+        }
+
+        traverse(context.renderData.blockAst);
+      },
+    },
+  });
 }
 ```
 
-当语言是 `rust` 或 `rs` 时，就往 `pre` 节点里插入一个按钮：
+这里将运行按钮和原本的复制按钮收敛在同一个插件内，确保两个操作按钮在右上角的间距与悬浮样式保持一致。同时通过语言名过滤，只针对 Rust 代码块注入执行按钮，其他前端或配置代码块保持原样。
 
-```ts title="src/plugins/expressive-code/custom-copy-button.ts"
-if (isRustBlock) {
-  addClass(node, "rust-playground-code");
-  node.children.push(rustRunButton);
-}
-node.children.push(copyButton);
-```
+## 2. 从高亮 DOM 还原源码
 
-这里保留了原来的复制按钮，并且只给 Rust 代码块添加运行按钮。这样 JavaScript、Shell、YAML 等普通代码块不会出现无意义的运行入口。
+代码块经过 Shiki 着色后，原始文本被拆解成了大量嵌套的 span 元素（包含语法标记、行号指示符、折叠占位符等）。如果直接通过 `pre.innerText` 获取代码，容易将多余的 UI 文本和折叠占位符一起打包发给编译器。
 
-## 从高亮后的 DOM 还原源码
-
-代码块经过 Expressive Code 渲染后，源码已经被拆成了很多高亮节点。运行时不能直接取整个 `pre.textContent`，因为里面还包含复制按钮、运行按钮等额外内容。
-
-现有复制按钮已经用 `.code:not(summary *)` 提取代码内容，所以运行功能复用同一个方法：
+我们在客户端提取源码时，精确选取承载代码字符的 `.code` 容器，同时排除折叠标题中的内容：
 
 ```ts title="src/components/misc/Markdown.astro"
-function getCodeFromPre(preEle: Element | null) {
+function getCodeFromPre(preEle: Element | null): string {
   const codeEle = preEle?.querySelector("code");
   return Array.from(codeEle?.querySelectorAll(".code:not(summary *)") ?? [])
     .map((el) => el.textContent)
@@ -83,17 +82,18 @@ function getCodeFromPre(preEle: Element | null) {
 }
 ```
 
-这样复制和运行拿到的是同一份源码，读者看到什么，提交给 Rust Playground 的就是什么。
+这样既避开了 Expressive Code 的装饰性元素，也能保证拿到的字符串与编辑器中的源码完全一致。
 
-## 调用 Rust Playground
+## 3. 请求 Rust Playground 执行接口
 
-Rust Playground 的执行接口是：
+Rust Playground 提供了公开的 `/execute` 接口，支持指定编译通道（Channel）、优化等级（Mode）和代码内容：
 
 ```text
 POST https://play.rust-lang.org/execute
+Content-Type: application/json
 ```
 
-请求体里需要指定 channel、mode、edition、crateType 和代码内容：
+前端在按钮点击事件触发后构造请求：
 
 ```ts title="src/components/misc/Markdown.astro"
 const response = await fetch("https://play.rust-lang.org/execute", {
@@ -114,25 +114,23 @@ const response = await fetch("https://play.rust-lang.org/execute", {
 });
 ```
 
-响应里最重要的是这几个字段：
+接口返回的核心数据结构如下：
 
 ```ts
 interface RustPlaygroundResponse {
-  success: boolean;
-  stdout: string;
-  stderr: string;
+  success: boolean;   // 编译执行是否成功
+  stdout: string;    // 程序标准输出
+  stderr: string;    // 编译诊断信息（包含警告或错误）
   exitDetail: string;
 }
 ```
 
-`stderr` 里通常包含 Cargo 编译日志；如果编译失败，错误信息也会出现在这里。`stdout` 是程序自己的输出。页面渲染时先展示 `stderr`，再展示 `stdout`，这样读者能先看到编译过程，再看到程序输出。
+## 4. 终端风格输出挂载
 
-## 渲染运行结果
-
-运行结果不应该弹窗，也不应该覆盖原代码块。更自然的方式是在当前代码块下面追加一个输出区域：
+执行结果不需要弹窗，直接贴合在当前代码块下方最符合直觉。我们在代码卡片容器（`.frame`）末尾动态挂载一个终端输出面板：
 
 ```ts title="src/components/misc/Markdown.astro"
-function getOrCreateRustOutput(preEle: Element) {
+function getOrCreateRustOutput(preEle: Element): HTMLElement {
   const host =
     preEle.closest(".expressive-code") ??
     preEle.closest(".frame") ??
@@ -142,56 +140,30 @@ function getOrCreateRustOutput(preEle: Element) {
   if (!output) {
     output = document.createElement("div");
     output.className = "rust-run-output";
-    output.setAttribute("aria-live", "polite");
     host?.appendChild(output);
   }
   return output;
 }
 ```
 
-每次点击运行时复用同一个输出区域：先显示 `Running...`，完成后显示 `Finished` 或 `Failed`，再按顺序展示 `stderr` 和 `stdout`。
+渲染时先输出 `stderr`（包含 `rustc` 的编译过程或报错），再输出 `stdout`。如果编译报错，高亮显示错误标识，方便快速定位语法问题。
 
-## 样式处理
+## 限制与注意事项
 
-运行按钮和复制按钮一样放在代码块右上角，只是位置往左挪一点：
+- **网络环境**：执行依赖客户端直接请求 `play.rust-lang.org`，如果读者处于受限网络环境可能会超时；
+- **依赖库限制**：Playground 预置了 `serde`、`regex`、`anyhow` 等最常用的前 100 个 crate，但无法支持任意自定义的 `Cargo.toml` 依赖；博文中的代码示例应当尽量保持自包含。
 
-```css title="src/styles/markdown.css"
-.copy-btn,
-.rust-run-btn {
-  all: initial;
-  @apply btn-regular-dark opacity-0 absolute h-8 w-8 top-3 rounded-lg;
-}
+## 实时体验
 
-.copy-btn {
-  @apply right-3;
-}
-
-.rust-run-btn {
-  @apply right-[3.25rem];
-}
-```
-
-输出区域沿用代码块背景和等宽字体，让它看起来像当前代码块的一部分，而不是另一张卡片。
-
-## 外部 crates 的限制
-
-Rust Playground 支持一批预装 crates，比如 `regex`、`serde`、`anyhow` 等常见库。但它不是完整的 Cargo 项目托管服务，不能让读者任意写 `Cargo.toml` 拉任意依赖。
-
-这对博客示例通常足够。文章里的代码应该尽量短，依赖也应该选择 Playground 已经内置的常见 crates。如果需要任意 crates 或自定义项目结构，就要考虑自己托管执行后端。
-
-## 最终效果
-
-现在，只要 Markdown 代码块语言写成 `rust` 或 `rs`，页面上就会出现运行按钮。点击后，浏览器会把代码提交给 Rust Playground，并把结果显示在代码块下方。
-
-下面这段代码用了 `regex` crate，可以直接点击运行。
+点击下方代码块右上角的运行图标即可验证：
 
 ```rust
-use regex::Regex;
+use std::time::Instant;
 
 fn main() {
-    let re = Regex::new(r"^h.*o$").unwrap();
-    let word = "hello";
-
-    println!("{word}: {}", re.is_match(word));
+    let start = Instant::now();
+    let sum: u64 = (1..=1_000_000).sum();
+    println!("1 到 100 万求和结果: {sum}");
+    println!("耗时: {:?}", start.elapsed());
 }
 ```
