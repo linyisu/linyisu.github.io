@@ -17,7 +17,6 @@ import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
-import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
@@ -63,11 +62,11 @@ export default defineConfig({
 			plugins: [
 				pluginCollapsibleSections(),
 				pluginLineNumbers(),
-				pluginLanguageBadge(),
 				pluginCustomCopyButton(),
 			],
 			defaultProps: {
 				wrap: true,
+				frame: "terminal",
 				overridesByLang: {
 					shellsession: {
 						showLineNumbers: false,
@@ -76,7 +75,8 @@ export default defineConfig({
 			},
 			styleOverrides: {
 				codeBackground: "var(--codeblock-bg)",
-				borderRadius: "0.75rem",
+				borderRadius: "0.5rem",
+				borderWidth: "1px",
 				borderColor: "var(--codeblock-border)",
 				codeFontSize: "0.875rem",
 				codeFontFamily:
@@ -87,11 +87,11 @@ export default defineConfig({
 					terminalBackground: "var(--codeblock-bg)",
 					terminalTitlebarBackground: "var(--codeblock-topbar-bg)",
 					editorTabBarBackground: "var(--codeblock-topbar-bg)",
-					editorActiveTabBackground: "none",
+					editorActiveTabBackground: "var(--codeblock-bg)",
 					editorActiveTabIndicatorBottomColor: "var(--primary)",
 					editorActiveTabIndicatorTopColor: "none",
-					editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
-					terminalTitlebarBorderBottomColor: "none",
+					editorTabBarBorderBottomColor: "var(--codeblock-border)",
+					terminalTitlebarBorderBottomColor: "var(--codeblock-border)",
 				},
 				textMarkers: {
 					delHue: 0,

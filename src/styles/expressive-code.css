@@ -1,9 +1,74 @@
+/* Expressive Code styles */
 .expressive-code {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+
     .frame {
-        @apply !shadow-none;
+        box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
     }
 
-    .title {
+    /* Authentic macOS Traffic Lights */
+    .frame.is-terminal .header::before {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+        background-color: transparent !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 54 13'%3E%3Ccircle cx='6.5' cy='6.5' r='6' fill='%23ff5f56' stroke='%23e0443e' stroke-width='0.75'/%3E%3Ccircle cx='27' cy='6.5' r='6' fill='%23ffbd2e' stroke='%23dea123' stroke-width='0.75'/%3E%3Ccircle cx='47.5' cy='6.5' r='6' fill='%2327c93f' stroke='%231aab29' stroke-width='0.75'/%3E%3C/svg%3E") !important;
+        width: 54px !important;
+        height: 13px !important;
+        left: 1rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        background-size: 54px 13px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        opacity: 1 !important;
+    }
+
+    .frame.is-terminal .header {
         font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.8rem;
+        height: 2.25rem;
+        min-height: 2.25rem;
+    }
+
+    .frame.is-terminal .title {
+        font-family: inherit;
+        font-weight: 500;
+        opacity: 0.85;
+    }
+
+    /* Soften line numbers and remove harsh vertical separator */
+    .ec-line .code {
+        border-inline-start-color: transparent !important;
+    }
+
+    /* Clearly visible line numbers (Light mode: distinct slate grey) */
+    .gutter .ln {
+        color: #8c92a4 !important;
+        opacity: 1 !important;
+        font-weight: 400;
+    }
+
+    .ec-line.highlight .gutter .ln {
+        color: #4078f2 !important;
+        font-weight: 600;
+    }
+}
+
+:root.dark .expressive-code {
+    .frame {
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Clearly visible line numbers (Dark mode: distinct Tokyo Night blue-grey) */
+    .gutter .ln {
+        color: #7982a9 !important;
+        opacity: 1 !important;
+        font-weight: 400;
+    }
+
+    .ec-line.highlight .gutter .ln {
+        color: #7aa2f7 !important;
+        font-weight: 600;
     }
 }

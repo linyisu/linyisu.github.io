@@ -87,7 +87,7 @@ export const licenseConfig: LicenseConfig = {
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
 	theme: {
-		light: "github-light",
-		dark: "github-dark",
+		light: "one-light",
+		dark: "tokyo-night",
 	},
 };
