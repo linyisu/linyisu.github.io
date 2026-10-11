@@ -155,15 +155,15 @@ function getOrCreateRustOutput(preEle: Element): HTMLElement {
 
 ## 实时体验
 
-点击下方代码块右上角的运行图标即可验证：
+下面这段代码引用了第三方 `regex` crate，点击右上角的运行图标即可直接执行验证：
 
 ```rust
-use std::time::Instant;
+use regex::Regex;
 
 fn main() {
-    let start = Instant::now();
-    let sum: u64 = (1..=1_000_000).sum();
-    println!("1 到 100 万求和结果: {sum}");
-    println!("耗时: {:?}", start.elapsed());
+    let re = Regex::new(r"^h.*o$").unwrap();
+    let word = "hello";
+
+    println!("{word}: {}", re.is_match(word));
 }
 ```
